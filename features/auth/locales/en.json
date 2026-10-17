@@ -1,0 +1,21 @@
+{
+    "login": "Login",
+    "loginState": "Please login to your account.",
+    "email": "Email",
+    "password": "Password",
+    "keepLoggedIn": "Keep me logged in",
+    "createAccount": "Create account",
+    "signUpState": "Fill the information below to add a new user",
+    "fullName": "Full Name",
+    "phone": "Phone",
+    "confirmPassword": "Confirm password",
+    "accept": "I accept to the",
+    "and": "and",
+    "terms": "terms & condition",
+    "privacy": "privacy policy",
+    "createOrganization": "Create Organization",
+    "organizationState": "Create your organization using the form below",
+    "organizationName": "Organization name",
+    "address": "Address",
+    "register": "Register"
+}

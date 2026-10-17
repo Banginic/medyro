@@ -1,0 +1,20 @@
+{
+  "name": "Geena Pharmacy LTD",
+  "short_name": "Geena Pharmacy",
+"description": "Geena Pharmacy provides trusted medications, healthcare products, wellness essentials, pharmacy services, and reliable health information for you and your family.",  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#04470a",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

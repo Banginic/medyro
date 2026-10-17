@@ -1,0 +1,79 @@
+MESSAGES
+
+TESTIMONIALS
+
+GIVE
+id
+name
+phone
+email
+occupation
+address
+status === ['pledge' | 'instant',]
+giveType === [ 'tithe' | 'donation' | 'contribution']
+amount
+message
+
+
+
+PAGES
+/about-us
+/leaders
+/give
+/programs & Events
+/media
+/partner
+/blogs
+/prayer & Contact
+
+Combine all church information.
+
+3.Sections:
+
+Church history
+Vision
+Mission
+Core beliefs
+Statement of faith
+
+4 Leadership
+
+Include:
+Senior Pastor
+Associate pastors
+Elders
+Administration
+Ministry leaders
+
+5. Events
+
+Include:
+Crusades
+Outreach Programs
+Conferences
+Weekly services
+Calendar
+Announcements
+
+6. Media
+
+This becomes the media center.
+
+Include:
+YouTube sermons
+Live streams
+Photo gallery
+Videos
+Podcasts (optional)
+
+7. Give
+Everything financial in one place.
+Include:
+
+Tithes
+Offerings
+Seed Faith
+Donations
+Bank accounts
+Mobile Money
+Become a Partner

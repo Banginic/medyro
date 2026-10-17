@@ -1,0 +1,21 @@
+{
+  "login": "Connexion",
+  "loginState": "Veuillez vous connecter à votre compte.",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "keepLoggedIn": "Rester connecté",
+  "createAccount": "Créer un compte",
+  "signUpState": "Remplissez les informations ci-dessous pour ajouter un nouvel utilisateur",
+  "fullName": "Nom complet",
+  "phone": "Téléphone",
+  "confirmPassword": "Confirmer le mot de passe",
+  "accept": "J'accepte les",
+  "and": "et",
+  "terms": "conditions d'utilisation",
+  "privacy": "politique de confidentialité",
+  "createOrganization": "Créer une organisation",
+"organizationState": "Créez votre organisation à l'aide du formulaire ci-dessous",
+"organizationName": "Nom de l'organisation",
+"address": "Adresse",
+"register": "S'inscrire"
+}
