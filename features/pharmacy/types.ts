@@ -1,8 +1,34 @@
+import { pgEnum } from "drizzle-orm/pg-core";
 import { APIResponse, PaginationType } from "@/models/types";
 
 export type PharmacyStatusType = "on_call" | "open" | "closed" | "unconfirmed";
 export type VerificationStatusType = "pending" | "verified" | "rejected";
-export type VerificationStatusEnum = ["pending", "verified", "rejected"];
+export const VerificationStatusEnum = ["pending", "verified", "rejected"] as const;
+
+
+export const cameroonRegionEnum = pgEnum("cameroon_region", [
+  "adamawa",
+  "centre",
+  "east",
+  "far_north",
+  "littoral",
+  "north",
+  "north_west",
+  "south",
+  "south_west",
+  "west",
+]);
+
+export type CameroonRegion = (typeof cameroonRegionEnum.enumValues)[number];
+export interface RegionType {
+  code: string;
+  value: CameroonRegion;
+  name: {
+    en: string;
+    fr: string;
+  };
+  capital: string;
+}
 
 export interface PharmacyType {
   id: string;
@@ -18,7 +44,7 @@ export interface PharmacyType {
   whatsApp?: string;
   email?: string;
   website?: string;
-  region?: string;
+  region?: CameroonRegion;
   city: string;
   address: string;
   latitude: number;

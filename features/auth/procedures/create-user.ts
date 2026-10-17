@@ -6,7 +6,7 @@ import { hashPassword } from "@/lib/bcrypt";
 
 export const createUser = createProcedure({
   schema: SignUpSchema,
-  protectAdmin: true,
+  // protectAdmin: true,
   handler: async ({ context, input }) => {
     const existData = await context.db
       .select()
@@ -25,8 +25,7 @@ export const createUser = createProcedure({
       .values({
         name: input.name,
         email: input.email,
-        phone: input.phone,
-        role: "admin",
+        role: "profile",
         password: hashedPassword,
       })
       .returning();

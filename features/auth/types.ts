@@ -1,5 +1,8 @@
 import { APIResponse, PaginationType } from "@/models/types";
 
+
+export type UserRoleType = 'admin' | 'profile' | 'user'
+export const UserRoleEnum = ['admin' , 'profile' , 'user'] as const
 export interface AdminSearchParamsType {
   page?: number;
   limit?: number;
@@ -11,7 +14,7 @@ export interface UserType {
   name: string;
   email: string;
   phone: string;
-  role: string;
+  role: UserRoleType;
   createdAt: Date;
   updatedAt: Date;
 }

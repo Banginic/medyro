@@ -7,8 +7,6 @@ import { auth } from "@/lib/auth";
 type AuthRequest = NextRequest & {
   auth: Session | null;
 };
-const adminUrl = "/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23";
-
 
 // Arcjet setup
 const aj = arcjet({
@@ -58,18 +56,18 @@ export default auth(async function proxy(req: AuthRequest) {
   //   return new Response("Unauthorized", { status: 401 });
   // }
 
-  const isAdminRoute = nextUrl.pathname.startsWith(adminUrl);
+  const isAdminRoute = nextUrl.pathname.startsWith(
+    "/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23",
+  );
+  const isProfileRoute = nextUrl.pathname.startsWith("/pharmacy");
 
-  const isProtectedRoute =
-    nextUrl.pathname.startsWith("/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23") 
-
-  // 4. Admin-only protection
+  // 4. Protect ADMIN Routes
   if (isAdminRoute && session?.user?.role !== "admin") {
     return NextResponse.redirect(new URL("/auth/sign-in", nextUrl));
   }
 
-  // 5. Protect CUSTOMER routes
-  if (isProtectedRoute && session?.user?.role !== "cashier" && !session) {
+  // 5. Protect PROFILE Routes
+  if (isProfileRoute && session?.user?.role !== "profile" && !session) {
     return NextResponse.redirect(new URL("/auth/sign-in", nextUrl));
   }
 
@@ -78,7 +76,10 @@ export default auth(async function proxy(req: AuthRequest) {
 
 export const config = {
   matcher: [
-    '/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23/',
-    '/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23/:path*',
+    "/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23/",
+    "/m5b8c5e0-9f42-7d6e-8401-5e7h2b6e8b23/:path*",
+
+    "/pharmacy/",
+    "/pharmacy/:path*",
   ],
 };

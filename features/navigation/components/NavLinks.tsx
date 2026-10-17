@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import CompanyDropDown from "./CompanyDropDown";
 
 
 interface Props {
@@ -33,7 +32,6 @@ function Navlinks({ navlinks }: { navlinks: Props[] }) {
           </Link>
         );
       })}
-      <CompanyDropDown />
     </div>
   );
 }

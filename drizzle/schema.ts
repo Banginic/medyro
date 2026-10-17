@@ -1,23 +1,30 @@
+import { UserRoleEnum } from "@/features/auth/types";
+import {  RegionEnum } from "@/features/pharmacy/contants";
+import { VerificationStatusEnum } from "@/features/pharmacy/types";
 import {
   pgTable,
   varchar,
   boolean,
-  integer,
-  jsonb,
   timestamp,
   uuid,
-  text,
   time,
   date,
-  unique,
+  pgEnum,
+  integer,
 } from "drizzle-orm/pg-core";
+
+export const userRoleEnum = pgEnum("user_role", UserRoleEnum);
+export const regionEnum = pgEnum("region", RegionEnum);
+export const verificationStatusEnum = pgEnum(
+  "verification_status",
+  VerificationStatusEnum,
+);
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
   email: varchar({ length: 255 }).notNull().unique(),
-  phone: varchar({ length: 255 }).notNull(),
-  role: varchar({ length: 255 }).notNull().default("client"),
+  role: userRoleEnum().notNull().default("user"),
   password: varchar({ length: 255 }).notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
@@ -32,9 +39,11 @@ export const news = pgTable("news", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-
 export const pharmacies = pgTable("pharmacies", {
   id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
   name: varchar({ length: 255 }).notNull(),
   slug: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 255 }).notNull(),
@@ -47,18 +56,21 @@ export const pharmacies = pgTable("pharmacies", {
   whatsApp: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull(),
   website: varchar({ length: 255 }),
-  region: varchar({ length: 255 }).notNull(),
+  region: regionEnum().default("littoral"),
   city: varchar({ length: 255 }).notNull(),
   address: varchar({ length: 255 }).notNull(),
-  latitude: varchar({ length: 255 }),
-  longitude: varchar({ length: 255 }),
-  verificationStatus: varchar({ length: 255 }).default('pending'),
+  latitude: integer(),
+  longitude: integer(),
+  verificationStatus: verificationStatusEnum().default("pending"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const onCallSchedule = pgTable("on_call_schedule", {
   id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
   date: date("date", { mode: "date" }).notNull().unique(),
   startTime: time("start_time").notNull().default("07:00"), // when on-call kicks in (after normal close)
   endTime: time("end_time"), // nullable = until morning/next open

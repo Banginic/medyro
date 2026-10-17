@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -12,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingBTN } from "@/components/index";
@@ -23,7 +23,10 @@ const SignInForm = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setLoading] = useState(false);
 
-  const baseUrl = process.env.NEXT_PUBLIC_ADMIN_URL!;
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL!;
+  const { update } = useSession();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -36,37 +39,70 @@ const SignInForm = () => {
   const onSubmit = async (data: SignInSchemaType) => {
     setError("");
     setLoading(true);
-    await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      callbackUrl: baseUrl,
-    });
-    reset();
-    setLoading(false);
+
+    try {
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (!result || result.error) {
+        setError("Invalid email or password.");
+        return;
+      }
+
+      // Refresh the session after successful authentication
+      const session = await update();
+
+      const role = session?.user?.role;
+
+      switch (role) {
+        case "admin":
+          router.replace(adminUrl);
+          break;
+
+        case "profile":
+          router.replace("/pharmacy");
+          break;
+
+        case "user":
+          router.replace("/");
+          break;
+
+        default:
+          setError("Unable to determine your account role.");
+          break;
+      }
+
+      reset();
+    } catch {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className=" min-h-screen relative grid place-items-center">
-      
-        <Button
-          className="absolute top-6 right-6"
-          variant={"ghost"}
-          type="button"
-          disabled={isLoading}
-          asChild
-        >
-          <Link href={"/"}>
-            <X />
-          </Link>
-        </Button>
+      <Button
+        className="absolute top-6 right-6"
+        variant={"ghost"}
+        type="button"
+        disabled={isLoading}
+        asChild
+      >
+        <Link href={"/"}>
+          <X />
+        </Link>
+      </Button>
       <Card className=" p-4 lg:p-6 w-[98%] max-w-110 absolute">
         <CardHeader>
           <CardTitle className="">Sign in</CardTitle>
           <CardDescription className="text-muted-foreground">
-            Sign in to your admin account to manage your buisiness
+            Sign in to your account to manage your account.
           </CardDescription>
         </CardHeader>
-
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="space-y-2">

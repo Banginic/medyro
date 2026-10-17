@@ -25,8 +25,11 @@ function MainNavbar() {
         >  <LanguagesToggler />
       
        
+          <Button variant={'outline'} className="hidden lg:flex" size={"sm"} asChild>
+            <Link href={"/auth/sign-in"}>Login</Link>
+          </Button>
           <Button className="hidden lg:flex" size={"sm"} asChild>
-            <Link href={"/products"}>Order Now</Link>
+            <Link href={"/auth/sign-up"}>Register Pharmacy</Link>
           </Button>
           <Hamburger />
         </div>

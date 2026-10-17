@@ -36,7 +36,7 @@ function UserForm({
 
   const { mutate, isPending } = useMutate<UserTypes, SignUpSchemaType>({
     mutationFn: createUser,
-    queriesToInvalidate: [["Category"]],
+    queriesToInvalidate: [["User"]],
     handleSubmitSuccess,
   });
 
@@ -93,24 +93,7 @@ function UserForm({
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="phone" className="text-muted-foreground">
-            Phone Number
-          </Label>
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="+237 677 00 33 88"
-              {...register("phone", { required: true })}
-              className="pl-10"
-            />
-          </div>
-          {errors.phone && (
-            <p className="text-sm text-pink-400 m-1">{errors.phone.message}</p>
-          )}
-        </div>
+      
 
         <div className="space-y-2">
           <Label htmlFor="email" className="text-muted-foreground">
