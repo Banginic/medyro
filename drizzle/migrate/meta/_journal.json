@@ -15,6 +15,20 @@
       "when": 1792262744232,
       "tag": "0001_majestic_shadowcat",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792351738397,
+      "tag": "0002_hard_night_thrasher",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792352392317,
+      "tag": "0003_daily_tinkerer",
+      "breakpoints": true
     }
   ]
 }

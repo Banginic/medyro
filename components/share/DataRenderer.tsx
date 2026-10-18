@@ -13,6 +13,7 @@ type DataRendererProps<T> = {
   isPaused?: boolean;
   isError?: boolean;
   loader?: React.ReactNode;
+  cta?: React.ReactNode;
   renderBack?: boolean;
 
   children: (data: T) => React.ReactNode;
@@ -25,6 +26,7 @@ function DataRenderer<T extends object>({
   isPaused,
   isError,
   loader,
+  cta,
   renderBack = false,
   children,
 }: DataRendererProps<T>) {
@@ -44,7 +46,7 @@ function DataRenderer<T extends object>({
   const isEmpty = !data || (Array.isArray(data) && data.length === 0);
 
   if (isEmpty) {
-    return <NoData message={` No ${title} available`} />;
+    return <NoData message={` No ${title} available`} cta={cta} />;
   }
 
   return (

@@ -82,7 +82,7 @@ export function createProcedure<T>({
         );
       }
 
-      if (protectClient && context.session?.user.role !== "user") {
+      if (protectClient && context.session?.user.role !== "profile") {
         return Response.json(
           { success: false, message: "Client only" },
           { status: 401 },

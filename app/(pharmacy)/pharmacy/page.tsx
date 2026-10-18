@@ -1,8 +1,8 @@
-import React from 'react'
+import PharmacyAdminDashboard from '@/features/pharmacy/components/admin/PharmacyAdminDashboard';
 
 function page() {
   return (
-    <div>page</div>
+    <PharmacyAdminDashboard />
   )
 }
 

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -9,7 +8,6 @@ import {
 import { Dispatch, SetStateAction } from "react";
 import { LoadingBTN } from "@/components/index";
 import { CircleOff, Save, X } from "lucide-react";
-import Image from "next/image";
 import { useMutate } from "@/hooks/useMutate";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

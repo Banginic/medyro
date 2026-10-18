@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
+import React from "react";
 import { Card } from "../ui/card";
 
-function NoData({ message }: { message: string }) {
-
+function NoData({ message, cta }: { message: string; cta?: React.ReactNode }) {
   return (
     <Card className="grid place-items-center mt-8 mx-auto rounded-md border-0 p-8  min-[95%] max-w-lg">
       <div className="text-center ">
@@ -11,9 +11,8 @@ function NoData({ message }: { message: string }) {
         <h3 className="text-lg font-semibold text-foreground mb-2">
           {message}
         </h3>
-        <p className="text-sm text-muted-foreground mb-6">
-         Try again later
-        </p>
+        <p className="text-sm text-muted-foreground mb-6">Try again later</p>
+        {cta && cta}
       </div>
     </Card>
   );
