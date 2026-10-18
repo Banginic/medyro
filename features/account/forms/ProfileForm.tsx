@@ -76,7 +76,7 @@ function ProfileForm({ pharmacy }: { pharmacy: PharmacyType }) {
       onSubmit={handleSubmit(onSubmit)}
       className="border p-4 rounded-md   mx-auto"
     >
-      <h2 className="font-semibold card-title mb-4">Project Information</h2>
+      <h2 className="font-semibold card-title mb-4">Pharmacy Info</h2>
 
       <div className="flex gap-4 flex-col lg:flex-row text-foreground/70">
         <div className="flex flex-col gap-1.5  w-full">

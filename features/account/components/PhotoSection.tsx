@@ -9,6 +9,7 @@ import CoverImageForm from "../forms/CoverImageForm";
 import LogoForm from "../forms/LogoForm";
 import { PharmacyType } from "@/features/pharmacy/types";
 import ProfileForm from "../forms/ProfileForm";
+import AddressForm from "../forms/AddressForm";
 
 function PhotoSection({ pharmacy }: { pharmacy: PharmacyType }) {
   const [openImageForm, setImageForm] = useState(false);
@@ -92,8 +93,10 @@ function PhotoSection({ pharmacy }: { pharmacy: PharmacyType }) {
           )}
         </>
       </header>
-      <div className="mt-12">
+      <div className="mt-12 space-y-4">
         <ProfileForm pharmacy={pharmacy} />
+        <AddressForm pharmacy={pharmacy} />
+
       </div>
     </div>
   );
