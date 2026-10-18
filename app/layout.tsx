@@ -39,7 +39,7 @@ export default function RootLayout({
       <head></head>
 
       <body
-        className={`relative min-h-screen w-full  page-text 
+        className={`relative min-h-screen w-full font-body page-text 
          `}
       >
         {" "}

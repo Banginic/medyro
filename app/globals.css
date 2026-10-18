@@ -212,7 +212,7 @@
    @apply text-[2rem] md:text-[2.7rem] tracking-tighter leading-[120%] mb-3 text-center  ;
   }
   .card-title {
-   @apply text-xl leading-[130%];
+   @apply text-lg leading-[130%];
   }
   .small {
   @apply  text-xs  font-normal;
@@ -227,7 +227,7 @@
     @apply text-base md:text-[1.125rem] md:leading-normal font-normal text-balance mx-auto text-center;
   }
   .page-text {
-   @apply  text-sm leading-[1.6] font-normal ;
+   @apply text-xs lg:text-sm leading-[1.6] font-normal ;
   }
    .section-padding {
     @apply px-4 sm:px-6 lg:px-8;
