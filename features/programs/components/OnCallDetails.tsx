@@ -5,7 +5,7 @@ function OnCallDetails({ onCalls }: { onCalls: OnCallType[] }) {
   const todayOnCall = getTodayCall(onCalls);
 
   return (
-    <div>
+    <>
       <section className="mb-12">
         <h2 className="text-xl font-semibold text-primary mb-3">On-Call Today</h2>
         {todayOnCall ? (
@@ -33,7 +33,7 @@ function OnCallDetails({ onCalls }: { onCalls: OnCallType[] }) {
           ))}
         </ul>
       </section>
-    </div>
+    </>
   );
 }
 

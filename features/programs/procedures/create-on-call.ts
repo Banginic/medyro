@@ -8,7 +8,7 @@ import { redisDel } from "@/lib/redis";
 //................................................................................................
 export const createOnCall = createProcedure({
   schema: OnCallSchema,
-  protectAdmin: true,
+  protectClient: true,
   handler: async ({ context, input }) => {
     const parsedDate = new Date(input.date);
 
@@ -25,7 +25,7 @@ export const createOnCall = createProcedure({
       .limit(1);
 
     if (existing) {
-      return "NotFound";
+      return "Exist";
     }
 
     const data = await context.db
@@ -41,6 +41,6 @@ export const createOnCall = createProcedure({
 
     revalidatePath("/programs");
 
-    return { data };
+    return { data, status: 201 };
   },
 });

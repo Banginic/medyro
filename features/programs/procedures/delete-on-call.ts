@@ -10,7 +10,7 @@ export const deleteOnCall = createProcedure({
   schema: z.object({
     id: z.string({ message: "ID is required." }),
   }),
-  protectAdmin: true,
+  protectClient: true,
 
   handler: async ({ context, input }) => {
     // Find existing data

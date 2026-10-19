@@ -14,15 +14,15 @@ export const getOnCalls = createProcedure({
   handler: async ({ context, input }) => {
     const { year, month } = input;
 
-    const cacheKey = ["programs", year, month].join(":");
+    // const cacheKey = ["programs", year, month].join(":");
 
-    const cached = await redisGet<{
-      data: typeof data;
-    }>(cacheKey);
+    // const cached = await redisGet<{
+    //   data: typeof data;
+    // }>(cacheKey);
 
-    if (cached) {
-      return cached;
-    }
+    // if (cached) {
+    //   return cached;
+    // }
 
     const conditions = [];
 
@@ -49,7 +49,7 @@ export const getOnCalls = createProcedure({
       .where(conditions.length ? and(...conditions) : undefined)
       .orderBy(asc(onCallSchedule.date));
 
-    await redisSet(cacheKey, data, 300);
+    // await redisSet(cacheKey, data, 300);
 
     return {
       data,

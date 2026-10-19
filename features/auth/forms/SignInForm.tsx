@@ -174,10 +174,10 @@ const SignInForm = () => {
               </Label>
             </div>
             <Link
-              href="/admin/forgot-password"
+              href="/auth/sign-up"
               className="text-sm text-primary hover:text-primary-glow transition-colors"
             >
-              Forgot password?
+              Create account
             </Link>
           </div>
 

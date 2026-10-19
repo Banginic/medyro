@@ -4,6 +4,7 @@ import { QUERY_KEYS } from "@/features/query-keys";
 import { getPharmacyProfile } from "@/features/pharmacy/actions/getPharmacyProfile";
 import { DataRenderer } from "@/components/index";
 import AccountDetails from "./AccountDetails";
+import RegisterCTA from "@/features/pharmacy/components/admin/RegisterCTA";
 
 function AccountPage() {
   const { data, isError, isFetching } = useQuery({
@@ -18,6 +19,7 @@ function AccountPage() {
         isError={isError}
         isLoading={isFetching}
         data={data?.data}
+        cta={<RegisterCTA />}
       >
         {(pharmacies) => <AccountDetails pharmacies={pharmacies} />}
       </DataRenderer>

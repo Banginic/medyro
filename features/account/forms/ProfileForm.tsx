@@ -78,9 +78,9 @@ function ProfileForm({ pharmacy }: { pharmacy: PharmacyType }) {
     >
       <h2 className="font-semibold card-title mb-4">Pharmacy Info</h2>
 
-      <div className="flex gap-4 flex-col lg:flex-row text-foreground/70">
+      <div className="flex gap-4 flex-col lg:flex-row ">
         <div className="flex flex-col gap-1.5  w-full">
-          <Label>Pharmacy Name</Label>
+          <Label className="text-muted-foreground">Pharmacy Name</Label>
           <Input
             placeholder="Acoxyl Pharmacy"
             {...register("name", { required: true })}
@@ -93,7 +93,7 @@ function ProfileForm({ pharmacy }: { pharmacy: PharmacyType }) {
         </div>
 
         <div className="flex flex-col gap-1.5 w-full mb-4">
-          <Label>Pharmacist Name</Label>
+          <Label className="text-muted-foreground">Pharmacist Name</Label>
           <Input {...register("pharmacistName", { required: true })} placeholder="Dr. Grace K." />
         </div>
         <>
@@ -106,7 +106,7 @@ function ProfileForm({ pharmacy }: { pharmacy: PharmacyType }) {
       </div>
 
       <div className="flex flex-col gap-1.5 w-full">
-        <Label>Description</Label>
+        <Label className="text-muted-foreground">Description</Label>
         <Textarea
           placeholder="Enter a description"
           {...register("description", { required: true })}
