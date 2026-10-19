@@ -3,7 +3,6 @@ import { protectWithArcjet } from "@/lib/protectWithArcjet";
 import { ContextType } from "./context";
 import { validate as isUuid } from "uuid";
 
-
 type ProcedureOptions<T> = {
   schema: z.ZodType<T>;
   handler: (options: { context: ContextType; input: T }) => Promise<any>;
@@ -25,6 +24,8 @@ function formDataToObject(formData: FormData): Record<string, any> {
   return result;
 }
 
+const JSON_FIELDS = ["schedule"];
+
 function normalizeFormData(input: Record<string, any>) {
   const stringFields = ["phone", "phoneNumber", "whatsapp"];
   const result: any = {};
@@ -32,8 +33,18 @@ function normalizeFormData(input: Record<string, any>) {
   for (const key in input) {
     const value = input[key];
 
+    // JSON-encoded fields (sent as strings inside FormData)
+    if (JSON_FIELDS.includes(key) && typeof value === "string") {
+      try {
+        result[key] = JSON.parse(value);
+      } catch {
+        result[key] = undefined; // fails validation with a clear "required" error
+      }
+      continue;
+    }
+
     if (Array.isArray(value) || value instanceof File) {
-      result[key] = value; // pass through files/arrays untouched
+      result[key] = value;
     } else if (value === "true") result[key] = true;
     else if (value === "false") result[key] = false;
     else if (
@@ -101,8 +112,6 @@ export function createProcedure<T>({
       ) {
         const formData = await req.formData();
 
-       
-
         input = normalizeFormData(formDataToObject(formData));
       }
 
@@ -127,7 +136,7 @@ export function createProcedure<T>({
         );
       }
 
-          // Include ID sent E.g.  /api/programs/id
+      // Include ID sent E.g.  /api/programs/id
       if (paramsId) {
         input = {
           ...input,
@@ -163,7 +172,6 @@ export function createProcedure<T>({
 
       // IF ITEM DOES NOT EXIST
       if (data === "NotFound") {
-        
         return Response.json(
           { success: false, message: "Item Not Found", data: [], status: 404 },
           { status: 404 },

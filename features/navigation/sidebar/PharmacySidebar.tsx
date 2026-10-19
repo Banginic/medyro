@@ -24,7 +24,7 @@ const pathname = usePathname()
   const SIDELINKS = [
     { name: "Dashboard", Icon: House, href: `/pharmacy` },
     { name: "Account", Icon: User, href: `/pharmacy/account`  },
-    { name: "Program", Icon: Timer, href: `/pharmacy/program` },
+    { name: "Programs", Icon: Timer, href: `/pharmacy/programs` },
     { name: "Billing", Icon: Wallet, href: `/pharmacy/billing` },
   ] as const;
 

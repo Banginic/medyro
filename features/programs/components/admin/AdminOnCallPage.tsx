@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { OnCallSearchParamsType } from "../../types";
 import { DataRenderer, TableSkeleton, Title } from "@/components/index";
 import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Timer } from "lucide-react";
 import { useState } from "react";
 import AdminOnCallGrid from "./AdminOnCallGrid";
 import { getOnCalls } from "../../actions/getOnCalls";
 import OnCallForm from "../../forms/OnCallForm";
 import OnCallMonthlyFilter from "../../filters/OnCallMonthlyFilter";
+import Link from "next/link";
 
 function AdminOnCallPage({ params }: { params: OnCallSearchParamsType }) {
   const [showForm, setForm] = useState(false);
@@ -19,8 +20,14 @@ function AdminOnCallPage({ params }: { params: OnCallSearchParamsType }) {
   return (
     <div className="w-[98%] max-w-3xl mx-auto py-16">
       <Title message="Call Days" />
-      <section className="mt-8 flex justify-end items-end gap-4 lg:gap-8">
+      <section className="mt-8 flex justify-center lg:justify-end items-end gap-4 lg:gap-8 flex-wrap">
         <OnCallMonthlyFilter />
+        <Button asChild variant={"outline"}>
+          <Link href={"/pharmacy/opening-hours"}>
+            <Timer />
+            Opening Hours
+          </Link>
+        </Button>
         <Button onClick={() => setForm(true)}>
           <PlusCircle />
           Add Call Day

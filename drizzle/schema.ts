@@ -1,4 +1,5 @@
 import { UserRoleEnum } from "@/features/auth/types";
+import {OpeningHourType } from "@/features/opening-hours/schemas/OpeningHoursSchema";
 import { RegionEnum } from "@/features/pharmacy/contants";
 import { VerificationStatusEnum } from "@/features/pharmacy/types";
 import {
@@ -10,8 +11,8 @@ import {
   time,
   date,
   pgEnum,
-  integer,
   doublePrecision,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 export const userRoleEnum = pgEnum("user_role", UserRoleEnum);
@@ -79,5 +80,15 @@ export const onCallSchedule = pgTable("on_call_schedule", {
   endTime: time("end_time"), // nullable = until morning/next open
   note: varchar("note", { length: 255 }), // e.g. "Emergency line only"
   isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const openingHours = pgTable("open_hours", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("userId_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  isActive: boolean().notNull().default(true),
+  schedule: jsonb("schedule").$type<OpeningHourType[]>().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
