@@ -194,6 +194,14 @@ export function createProcedure<T>({
         );
       }
 
+      // Unauthorized
+      if (data === "Unauthorized") {
+        return Response.json(
+          { success: false, message: "Unauthorized", data: [] },
+          { status: 401 },
+        );
+      }
+
       const responseData = data?.data ?? data;
 
       return Response.json(

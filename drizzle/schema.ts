@@ -1,5 +1,5 @@
 import { UserRoleEnum } from "@/features/auth/types";
-import {  RegionEnum } from "@/features/pharmacy/contants";
+import { RegionEnum } from "@/features/pharmacy/contants";
 import { VerificationStatusEnum } from "@/features/pharmacy/types";
 import {
   pgTable,
@@ -11,6 +11,7 @@ import {
   date,
   pgEnum,
   integer,
+  doublePrecision,
 } from "drizzle-orm/pg-core";
 
 export const userRoleEnum = pgEnum("user_role", UserRoleEnum);
@@ -41,9 +42,11 @@ export const news = pgTable("news", {
 
 export const pharmacies = pgTable("pharmacies", {
   id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id").references(() => users.id, {
-    onDelete: "cascade",
-  }).notNull(),
+  userId: uuid("user_id")
+    .references(() => users.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
   name: varchar({ length: 255 }).notNull().unique(),
   slug: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 255 }),
@@ -59,8 +62,8 @@ export const pharmacies = pgTable("pharmacies", {
   city: varchar({ length: 255 }).notNull(),
   region: varchar({ length: 255 }).notNull(),
   address: varchar({ length: 255 }).notNull(),
-  latitude: integer(),
-  longitude: integer(),
+  latitude: doublePrecision("latitude"),
+  longitude: doublePrecision("longitude"),
   verificationStatus: verificationStatusEnum().default("pending"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),

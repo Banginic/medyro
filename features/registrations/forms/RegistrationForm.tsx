@@ -123,7 +123,7 @@ function RegistrationForm() {
               >
                 <option value="">Select your region</option>
                 {CAMEROON_REGIONS.map((item) => (
-                  <option value={item.name}>{item.name}</option>
+                  <option key={item.name} value={item.name}>{item.name}</option>
                 ))}{" "}
               </select>
               {errors.region && (

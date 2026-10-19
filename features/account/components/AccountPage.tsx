@@ -12,7 +12,7 @@ function AccountPage() {
   });
 
   return (
-    <div className="min-h-screen py-16 px-4 max-w-2xl mx-auto border">
+    <div className="min-h-screen py-16 px-4 max-w-2xl mx-auto ">
       <DataRenderer
         title="pharmacy details"
         isError={isError}
