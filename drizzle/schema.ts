@@ -22,6 +22,16 @@ export const verificationStatusEnum = pgEnum(
   VerificationStatusEnum,
 );
 
+export const messages = pgTable("messages", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 25 }).notNull(),
+  email: varchar("email", { length: 30 }).notNull(),
+  phone: varchar("phone", { length: 15 }).notNull(),
+  subject: varchar("subject", { length: 50 }).notNull(),
+  body: varchar("body", { length: 500 }).notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: varchar({ length: 255 }).notNull().unique(),

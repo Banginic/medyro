@@ -43,6 +43,13 @@
       "when": 1792417056650,
       "tag": "0005_late_turbo",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792420422937,
+      "tag": "0006_short_king_bedlam",
+      "breakpoints": true
     }
   ]
 }

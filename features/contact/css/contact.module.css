@@ -1,0 +1,42 @@
+
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    display: relative;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+}
+.label{
+z-index: 11;
+/* translate:0 2rem; */
+padding-left: 16px;
+border: 1px solid red;
+background: #000;
+display: none;
+}
+input{
+/* display: none; */
+color: red;
+border: none;
+outline: none;
+background-color: transparent;
+border-bottom:1px solid #811abc;
+font-size: 16px;
+padding: 0.6 1rem; 
+transition: all 1s;
+z-index: 10;
+}
+.input:focus ~ label{
+ translate: 0;
+ opacity: 1;
+ background: yellow;
+}
+.input:hover ~ label{
+    opacity: 1;
+    background: green;
+    display: grid;
+ translate: 0;
+}
+.inputBox:active ~ .label{
+    display: grid;
+}

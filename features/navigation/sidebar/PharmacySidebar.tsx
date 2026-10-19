@@ -6,6 +6,7 @@ import {
   Timer,
   Wallet,
   User,
+  Headset,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -26,6 +27,7 @@ const pathname = usePathname()
     { name: "Account", Icon: User, href: `/pharmacy/account`  },
     { name: "Programs", Icon: Timer, href: `/pharmacy/programs` },
     { name: "Billing", Icon: Wallet, href: `/pharmacy/billing` },
+    { name: "Support", Icon: Headset, href: `/pharmacy/support` },
   ] as const;
 
   function closeSidebar() {
