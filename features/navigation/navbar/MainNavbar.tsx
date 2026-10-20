@@ -25,6 +25,10 @@ function MainNavbar() {
         >  <LanguagesToggler />
       
        
+          <Button size='sm' className=" lg:hidden" asChild>
+            <Link href={"/auth/sign-in"}>Login</Link>
+          </Button>
+       
           <Button variant={'outline'} className="hidden lg:flex" size={"sm"} asChild>
             <Link href={"/auth/sign-in"}>Login</Link>
           </Button>

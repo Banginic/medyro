@@ -231,7 +231,7 @@ export default function Hero() {
 
   return (
     <HeroSection>
-      <section className="mx-auto grid min-h-[100svh] max-w-6xl 2xl:max-w-7xl 2xl:items-center  gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-16">
+      <section className="mx-auto grid min-h-[100svh] max-w-7xl 2xl:items-center  gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14 lg:py-16">
         {/* Left: message + search */}
         <div className="max-w-xl mt-12 2xl:mt-0">
           <h1
@@ -246,7 +246,7 @@ export default function Hero() {
           {/* FORM====================================================================== */}
           <form
             onSubmit={handleFind}
-            className="mt-8 rounded-2xl border border-primary/20 bg-white p-4 "
+            className="mt-8 rounded-2xl border border-primary/20 bg-card p-4 "
           >
             <label htmlFor="address" className="sr-only">
               {COPY.placeholder}
@@ -262,24 +262,25 @@ export default function Hero() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={COPY.placeholder}
                 autoComplete="street-address"
-                className="rounded-xl 2xl:h-12  pl-12 "
+                className="rounded-xl  pl-12 "
               />
             </div>
 
-            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-3 flex flex-col gap-3 lg:flex-row ">
               <Button
                 type="button"
                 variant="outline"
+
                 onClick={handleNearMe}
                 disabled={locating}
-                className=" flex-1 2xl:h-12 "
+                className=" lg:flex-1 "
               >
-                <LocateFixed className="mr-2 h-4 w-4" />
+                <LocateFixed />
                 {locating ? COPY.locating : COPY.nearMe}
               </Button>
-              <Button type="submit" className=" flex-1 2xl:h-12 ">
-                <Search className="mr-2 h-4 w-4" />
-                {COPY.find}
+              <Button size="lg" type="submit" className=" lg:flex-1 ">
+                <Search />
+                Find Pharmacy
               </Button>
             </div>
           </form>
