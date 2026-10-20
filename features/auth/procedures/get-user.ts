@@ -16,7 +16,7 @@ export const getUser = createProcedure({
         name:  users.name,
         role: users.role,
         email: users.email,
-        phone: users.phone,
+
         createdAt: users.createdAt,
       })
       .from(users)

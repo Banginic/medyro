@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Clock, LocateFixed, MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { HeroSection } from "@/features/pharmacy/components/admin/HeroBackground";
 
 /* ---------- Copy (French first; swap here for English) ---------- */
 const COPY = {
@@ -229,7 +230,7 @@ export default function Hero() {
   }
 
   return (
-    <>
+    <HeroSection>
       <section className="mx-auto grid min-h-[100svh] max-w-6xl 2xl:max-w-7xl 2xl:items-center  gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-16">
         {/* Left: message + search */}
         <div className="max-w-xl mt-12 2xl:mt-0">
@@ -305,6 +306,6 @@ export default function Hero() {
           </div>
         </div>
       </section>
-    </>
+    </HeroSection>
   );
 }
