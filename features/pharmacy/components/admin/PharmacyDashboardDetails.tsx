@@ -1,149 +1,135 @@
 "use client";
-// app/dashboard/page.tsx
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  ShieldCheck,
-  Pencil,
-  Pill,
-  Truck,
-  Stethoscope,
-} from "lucide-react";
-import { PharmacyType } from "../../types";
 
-// Remplacez par vos données réelles (Drizzle / Neon)
-const pharmacy = {
-  name: "Pharmacie Geena",
-  manager: "Dr. Marie Ngono",
-  license: "PH-LT-0421",
-  address: "Rue Joss, Bonanjo, Douala",
-  phone: "+237 6 90 00 00 00",
-  email: "contact@pharmacie-geena.cm",
-  about:
-    "Pharmacie de quartier ouverte à tous : médicaments sur ordonnance, produits de santé et conseils personnalisés par notre équipe de pharmaciens.",
-  services: [
-    { label: "Médicaments sur ordonnance", icon: Pill },
-    { label: "Livraison à domicile", icon: Truck },
-    { label: "Conseils pharmaceutiques", icon: Stethoscope },
-  ],
-  hours: [
-    { day: "Lundi – Vendredi", time: "08h00 – 20h00" },
-    { day: "Samedi", time: "08h00 – 18h00" },
-    { day: "Dimanche", time: "Garde : 09h00 – 13h00" },
-  ],
-};
+import Image from "next/image";
+import Link from "next/link";
+import { Building2, MapPin, Phone, Plus, UserRound } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PharmacyType } from "../../types";
+import NearbyPharmacies from "./NearbyPharmacies";
 
 export default function PharmacyDashboardDetails({
   pharmacies,
 }: {
   pharmacies: PharmacyType[];
 }) {
-  const pharmacyd = pharmacies[0];
-  const initials = pharmacy.name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("");
+  const pharmacy = pharmacies[0];
+
+  if (!pharmacy) {
+    return (
+      <main className="grid min-h-[60vh] place-items-center px-4 text-center">
+        <div>
+          <h1 className="text-2xl font-semibold">No pharmacy yet</h1>
+          <p className="mt-2 text-muted-foreground">
+            Add your first pharmacy to see your dashboard.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  const today = new Date().toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const nearbySearchParams = {
+    city: pharmacy.city,
+    latitude: pharmacy.latitude,
+    longitude: pharmacy.longitude,
+    excludedId: pharmacy.id,
+  };
+
+  // Rename to match your type (e.g. pharmacy.cover, pharmacy.image)
+  const coverUrl: string | null | undefined = (pharmacy as { coverImage?: string | null }).coverImage;
 
   return (
-    <main className="min-h-screen bg-emerald-50/40 px-4 py-8 sm:px-8">
-      <div className="mx-auto max-w-4xl space-y-6">
-        {/* Bienvenue */}
-        <header className="rounded-2xl bg-emerald-800 p-6 text-white sm:p-8">
-          <p className="text-sm text-emerald-100">Tableau de bord</p>
-          <h1 className="mt-1 text-2xl font-semibold sm:text-3xl">
-            Bienvenue, {pharmacy.manager}
-          </h1>
-          <p className="mt-2 max-w-xl text-emerald-100">
-            Retrouvez ici le profil de votre pharmacie et gardez vos
-            informations à jour pour vos patients.
-          </p>
-        </header>
+    <main className="min-h-screen bg-card/50 backdrop-blur-2xl border rounded-2xl relative">
+      <div className="mx-auto max-w-6xl space-y-16 px-4 py-8 md:px-10 md:py-14">
+        {/* ------------------------------- Hero ------------------------------- */}
+        <section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Text */}
+          <div>
+            <p
+              suppressHydrationWarning
+              className="text-sm font-medium uppercase tracking-wide text-muted-foreground"
+            >
+              {today}
+            </p>
 
-        {/* Profil */}
-        <section className="rounded-2xl border bg-white p-6 shadow-sm sm:p-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-100 text-xl font-semibold text-emerald-800">
-                {initials}
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900">
-                  {pharmacy.name}
-                </h2>
-                <p className="flex items-center gap-1.5 text-sm text-slate-600">
-                  <ShieldCheck className="h-4 w-4 text-emerald-700" />
-                  Licence n° {pharmacy.license}
-                </p>
-              </div>
-            </div>
-            <button className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-800 px-4 py-2 text-sm font-medium text-emerald-800 transition hover:bg-emerald-800 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-800">
-              <Pencil className="h-4 w-4" />
-              Modifier le profil
-            </button>
-          </div>
+            <h1 className="mt-3 text-4xl font-display font-bold leading-[1.1] tracking-tight md:text-5xl">
+              {pharmacy.name}
+            </h1>
 
-          <p className="mt-6 max-w-2xl leading-relaxed text-slate-700">
-            {pharmacy.about}
-          </p>
-
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            {/* Coordonnées */}
-            <div>
-              <h3 className="font-medium text-slate-900">Coordonnées</h3>
-              <ul className="mt-3 space-y-3 text-sm text-slate-700">
-                <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
-                  {pharmacy.address}
+            <ul className="mt-6 space-y-2.5 text-muted-foreground">
+              {pharmacy.pharmacistName && (
+                <li className="flex items-center gap-2.5">
+                  <UserRound className="size-4 shrink-0" aria-hidden />
+                  <span>{pharmacy.pharmacistName}</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
-                  {pharmacy.phone}
-                </li>
-                <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
-                  {pharmacy.email}
-                </li>
-              </ul>
-            </div>
-
-            {/* Horaires */}
-            <div>
-              <h3 className="font-medium text-slate-900">
-                Horaires d’ouverture
-              </h3>
-              <ul className="mt-3 space-y-3 text-sm text-slate-700">
-                {pharmacy.hours.map((h) => (
-                  <li key={h.day} className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
-                    <span>
-                      <span className="font-medium">{h.day}</span>
-                      <br />
-                      {h.time}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Services */}
-          <div className="mt-8 border-t pt-6">
-            <h3 className="font-medium text-slate-900">Services proposés</h3>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {pharmacy.services.map(({ label, icon: Icon }) => (
-                <li
-                  key={label}
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-sm text-emerald-900"
-                >
-                  <Icon className="h-4 w-4" />
-                  {label}
-                </li>
-              ))}
+              )}
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
+                <span>
+                  {pharmacy.address}, {pharmacy.city}, Cameroon
+                </span>
+              </li>
             </ul>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <a href={`tel:+237${String(pharmacy.phone).replace(/\s/g, "")}`}>
+                  <Phone className="size-4" />
+                  {pharmacy.phone}
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/pharmacy/programs">
+                  <Plus className="size-4" />
+                  Add call day
+                </Link>
+              </Button>
+            </div>
+
+            {pharmacies.length > 1 && (
+              <button className="mt-5 text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground">
+                Switch pharmacy
+              </button>
+            )}
           </div>
+
+          {/* Cover photo / placeholder */}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted">
+            {coverUrl ? (
+              <Image
+                src={coverUrl}
+                alt={`${pharmacy.name} storefront`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-primary/10 via-muted to-primary/5">
+                <div className="text-center text-muted-foreground">
+                  <Building2 className="mx-auto size-12" aria-hidden />
+                  <p className="mt-3 text-sm">Cover photo</p>
+                </div>
+              </div>
+            )}
+
+            {/* City chip over the image */}
+            <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-card/90 px-3 py-1.5 text-sm font-medium shadow-sm backdrop-blur">
+              <MapPin className="size-3.5" aria-hidden />
+              {pharmacy.city}
+            </span>
+          </div>
+        </section>
+
+        {/* ---------------------------- Nearby section ---------------------------- */}
+        <section className="">
+          <NearbyPharmacies params={nearbySearchParams} />
         </section>
       </div>
     </main>

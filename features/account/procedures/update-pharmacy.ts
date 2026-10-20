@@ -11,7 +11,7 @@ export const updatePharmacy = createProcedure({
     const userId = context.session?.user.id;
 
     if (!userId) {
-      return "NotFound";
+      return "Unauthorized";
     }
 
     // Check existing data
@@ -35,6 +35,7 @@ export const updatePharmacy = createProcedure({
     const data = await context.db
       .update(pharmacies)
       .set(filteredData)
+      .where(and(eq(pharmacies.id, existData[0].id)))
       .returning();
 
     return { data, status: 202 };

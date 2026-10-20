@@ -1,6 +1,6 @@
 import { createProcedure } from "@/server/procedure";
 import { z } from "zod";
-import { and, gte, lte, asc } from "drizzle-orm";
+import { and, gte, lte, asc, eq } from "drizzle-orm";
 import { onCallSchedule } from "@/drizzle/schema";
 import { redisGet, redisSet } from "@/lib/redis";
 
@@ -14,6 +14,12 @@ export const getOnCalls = createProcedure({
   handler: async ({ context, input }) => {
     const { year, month } = input;
 
+      const userId = context.session?.user.id;
+
+    if (!userId) {
+      return "NotFound";
+    }
+
     // const cacheKey = ["programs", year, month].join(":");
 
     // const cached = await redisGet<{
@@ -24,7 +30,7 @@ export const getOnCalls = createProcedure({
     //   return cached;
     // }
 
-    const conditions = [];
+    const conditions = [eq(onCallSchedule.userId, userId)];
 
     if (year && month) {
       // both provided — filter to that specific month

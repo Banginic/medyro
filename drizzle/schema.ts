@@ -82,10 +82,10 @@ export const pharmacies = pgTable("pharmacies", {
 
 export const onCallSchedule = pgTable("on_call_schedule", {
   id: uuid("id").defaultRandom().primaryKey(),
-  pharmacyId: uuid("pharmacy_id").references(() => pharmacies.id, {
+  userId: uuid("user_id").references(() => users.id, {
     onDelete: "cascade",
   }),
-  date: date("date", { mode: "date" }).notNull().unique(),
+  date: date("date", { mode: "date" }).notNull(),
   startTime: time("start_time").notNull().default("07:00"), // when on-call kicks in (after normal close)
   endTime: time("end_time"), // nullable = until morning/next open
   note: varchar("note", { length: 255 }), // e.g. "Emergency line only"

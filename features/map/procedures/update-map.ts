@@ -34,6 +34,7 @@ export const updateMap = createProcedure({
         latitude: input.latitude,
         longitude: input.longitude,
       })
+      .where(and(eq(pharmacies.id, existData[0].id)))
       .returning();
 
     return { data, status: 202 };

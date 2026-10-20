@@ -50,6 +50,27 @@
       "when": 1792420422937,
       "tag": "0006_short_king_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792435031882,
+      "tag": "0007_talented_surge",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1792495528858,
+      "tag": "0008_absurd_robbie_robertson",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792495626134,
+      "tag": "0009_demonic_zarda",
+      "breakpoints": true
     }
   ]
 }

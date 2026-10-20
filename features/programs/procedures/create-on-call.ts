@@ -10,6 +10,11 @@ export const createOnCall = createProcedure({
   schema: OnCallSchema,
   protectClient: true,
   handler: async ({ context, input }) => {
+    const userId = context.session?.user.id;
+
+    if (!userId) {
+      return "Unauthorized";
+    }
     const parsedDate = new Date(input.date);
 
     // guard against duplicate on-call entries for the same day
@@ -20,6 +25,7 @@ export const createOnCall = createProcedure({
         and(
           eq(onCallSchedule.date, parsedDate),
           eq(onCallSchedule.isActive, true),
+          eq(onCallSchedule.userId, userId)
         ),
       )
       .limit(1);
@@ -31,13 +37,14 @@ export const createOnCall = createProcedure({
     const data = await context.db
       .insert(onCallSchedule)
       .values({
+        userId,
         date: parsedDate,
         startTime: input.startTime,
         endTime: input.endTime || null,
       })
-      .returning();
+      
 
-     await redisDel('programs')
+    await redisDel("programs");
 
     revalidatePath("/programs");
 

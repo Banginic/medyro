@@ -6,6 +6,8 @@ import { getPharmacyProfile } from "../../actions/getPharmacyProfile";
 import { DataRenderer } from "@/components/index";
 import PharmacyDashboardDetails from "./PharmacyDashboardDetails";
 import RegisterCTA from "./RegisterCTA";
+import PharmacyHeroSkeleton from "./PharmacyHeroSkeleton";
+import { HeroSection } from "./HeroBackground";
 
 function PharmacyAdminDashboard() {
   const { data, isError, isFetching } = useQuery({
@@ -14,15 +16,24 @@ function PharmacyAdminDashboard() {
   });
 
   return (
-    <div className="mt-12 px-4">
+    <div className="mt-12 rounded-2xl ">
       <DataRenderer
         title={"pharmacy info"}
         isError={isError}
         isLoading={isFetching}
         data={data?.data}
         cta={<RegisterCTA />}
+        loader={
+          <HeroSection>
+            <PharmacyHeroSkeleton />
+          </HeroSection>
+        }
       >
-        {(pharmacies) => <PharmacyDashboardDetails pharmacies={pharmacies} />}
+        {(pharmacies) => (
+          <HeroSection>
+            <PharmacyDashboardDetails pharmacies={pharmacies} />
+          </HeroSection>
+        )}
       </DataRenderer>
     </div>
   );

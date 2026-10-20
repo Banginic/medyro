@@ -45,6 +45,7 @@ export const updateCoverImage = createProcedure({
         coverImage: secure_url,
         coverImagePublicId: public_id,
       })
+       .where(and(eq(pharmacies.id, existData[0].id)))
       .returning();
 
     return { data, status: 202 };

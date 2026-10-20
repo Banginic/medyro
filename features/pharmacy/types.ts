@@ -3,8 +3,11 @@ import { APIResponse, PaginationType } from "@/models/types";
 
 export type PharmacyStatusType = "on_call" | "open" | "closed" | "unconfirmed";
 export type VerificationStatusType = "pending" | "verified" | "rejected";
-export const VerificationStatusEnum = ["pending", "verified", "rejected"] as const;
-
+export const VerificationStatusEnum = [
+  "pending",
+  "verified",
+  "rejected",
+] as const;
 
 export const cameroonRegionEnum = pgEnum("cameroon_region", [
   "adamawa",
@@ -41,6 +44,7 @@ export interface PharmacyType {
   coverImagePublicId?: string;
   pharmacistName?: string;
   phone: string;
+  distanceKm: string;
   whatsApp?: string;
   email?: string;
   website?: string;
@@ -60,75 +64,13 @@ export interface PharmacyTypes extends APIResponse {
   pagination?: PaginationType;
 }
 
-export const SAMPLE_PHARMACIES: PharmacyType[] = [
-  {
-    id: "1",
-    name: "Pharmacie du Centre",
-    city: "Douala",
-    address: "Akwa",
-    phone: "+237 600 000 001",
-    status: "on_call",
-    verificationStatus: "verified",
-    latitude: 4.0469,
-    longitude: 9.6995,
-  },
-  {
-    id: "2",
-    name: "Pharmacie de Bonamoussadi",
-    city: "Douala",
-    address: "Bonamoussadi",
-    phone: "+237 600 000 002",
-    status: "on_call",
-    verificationStatus: "verified",
-    latitude: 4.0897,
-    longitude: 9.7421,
-  },
-  {
-    id: "3",
-    name: "Pharmacie du Marché",
-    city: "Yaoundé",
-    address: "Centre-ville",
-    phone: "+237 600 000 003",
-    status: "unconfirmed",
-    verificationStatus: "verified",
-    latitude: 3.8667,
-    longitude: 11.5167,
-  },
-  {
-    id: "4",
-    name: "Pharmacie de Bastos",
-    city: "Yaoundé",
-    address: "Bastos",
-    phone: "+237 600 000 004",
-    status: "open",
-    verificationStatus: "verified",
-    latitude: 3.8935,
-    longitude: 11.5112,
-  },
-
-  {
-    id: "6",
-    name: "Pharmacie Mile One",
-    city: "Bamenda",
-    address: "Commercial Avenue",
-    phone: "+237 600 000 006",
-    status: "on_call",
-    verificationStatus: "verified",
-    latitude: 5.9631,
-    longitude: 10.1591,
-  },
-  {
-    id: "7",
-    name: "Pharmacie Molyko",
-    city: "Buea",
-    address: "Molyko",
-    phone: "+237 600 000 007",
-    status: "open",
-    verificationStatus: "verified",
-    latitude: 4.1527,
-    longitude: 9.2905,
-  },
-];
+export interface NearbyPharmacySearchParams {
+  city: string;
+  limit?: number;
+  excludedId?: string;
+  latitude?: number;
+  longitude?: number;
+}
 
 export const CITIES = [
   "Douala",

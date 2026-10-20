@@ -76,7 +76,11 @@ export function createProcedure<T>({
   ) => {
     try {
       // RATE LIMITING AND BOT PROTECTION......................................................................................................
-      protectWithArcjet(req);
+       const arcjetResponse = await protectWithArcjet(req);
+
+      if (arcjetResponse) {
+        return arcjetResponse;
+      }
 
       // AUTH
       if (protect && !context.session) {

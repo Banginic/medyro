@@ -38,7 +38,7 @@ function AdminOnCallPage({ params }: { params: OnCallSearchParamsType }) {
           isError={isError}
           isLoading={isFetching}
           data={data?.data}
-          title="leader"
+          title="call"
           loader={<TableSkeleton />}
         >
           {(onCalls) => <AdminOnCallGrid onCalls={onCalls} />}
