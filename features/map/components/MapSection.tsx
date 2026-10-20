@@ -60,7 +60,7 @@ function MapSection({ pharmacy }: { pharmacy: PharmacyType }) {
         )}
         {showForm2 && (
           <div className="fixed inset-0 backdrop-blur-2xl bg-background/20 h-screen grid place-items-center py-8">
-            <GetCurrentLocation closeForm={setForm} />
+            <GetCurrentLocation closeForm={setForm2} />
           </div>
         )}
       </>
