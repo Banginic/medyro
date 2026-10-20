@@ -85,6 +85,11 @@ export const onCallSchedule = pgTable("on_call_schedule", {
   userId: uuid("user_id").references(() => users.id, {
     onDelete: "cascade",
   }),
+   pharmacyId: uuid("pharmacy_id")
+    .references(() => pharmacies.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
   date: date("date", { mode: "date" }).notNull(),
   startTime: time("start_time").notNull().default("07:00"), // when on-call kicks in (after normal close)
   endTime: time("end_time"), // nullable = until morning/next open

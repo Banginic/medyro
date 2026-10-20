@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { OpeningHourType } from "../types";
 import { DAY_LABELS } from "../schemas/OpeningHoursSchema";
 
-function AdminOpeningHourCard({
+function OpeningHourCard({
   openingHour,
 }: {
   openingHour: OpeningHourType;
@@ -38,4 +38,4 @@ function AdminOpeningHourCard({
   );
 }
 
-export default AdminOpeningHourCard;
+export default OpeningHourCard;

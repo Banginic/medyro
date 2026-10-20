@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo,} from "react";
 import { motion } from "framer-motion";
 import {
   Clock,
@@ -152,7 +152,7 @@ const openDeleteDialogue =  useUIStore((state) => state.openDeleteDialogue)
               >
                 <Clock className="size-4 shrink-0" aria-hidden />
                 <span>
-                  {onCall.startTime} – {onCall.endTime}
+                    {onCall.startTime.slice(0,5)} – {onCall.endTime.slice(0,5)}
                 </span>
                
               </h3>

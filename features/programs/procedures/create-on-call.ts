@@ -1,6 +1,6 @@
 import { eq, and } from "drizzle-orm";
 import { createProcedure } from "@/server/procedure";
-import { onCallSchedule } from "@/drizzle/schema";
+import { onCallSchedule, pharmacies } from "@/drizzle/schema";
 import { OnCallSchema } from "../schemas/onCallSchema";
 import { revalidatePath } from "next/cache";
 import { redisDel } from "@/lib/redis";
@@ -17,6 +17,16 @@ export const createOnCall = createProcedure({
     }
     const parsedDate = new Date(input.date);
 
+    const pharmacyDetails = await context.db
+      .select({ id: pharmacies.id })
+      .from(pharmacies)
+      .where(eq(pharmacies.userId, userId))
+      .limit(1);
+
+    if (pharmacyDetails.length === 0) {
+      return "NotFound";
+    }
+
     // guard against duplicate on-call entries for the same day
     const [existing] = await context.db
       .select({ id: onCallSchedule.id })
@@ -25,7 +35,7 @@ export const createOnCall = createProcedure({
         and(
           eq(onCallSchedule.date, parsedDate),
           eq(onCallSchedule.isActive, true),
-          eq(onCallSchedule.userId, userId)
+          eq(onCallSchedule.userId, userId),
         ),
       )
       .limit(1);
@@ -34,15 +44,13 @@ export const createOnCall = createProcedure({
       return "Exist";
     }
 
-    const data = await context.db
-      .insert(onCallSchedule)
-      .values({
-        userId,
-        date: parsedDate,
-        startTime: input.startTime,
-        endTime: input.endTime || null,
-      })
-      
+    const data = await context.db.insert(onCallSchedule).values({
+      userId,
+      pharmacyId: pharmacyDetails[0].id,
+      date: parsedDate,
+      startTime: input.startTime,
+      endTime: input.endTime || null,
+    });
 
     await redisDel("programs");
 

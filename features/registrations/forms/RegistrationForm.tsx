@@ -144,7 +144,7 @@ function RegistrationForm() {
                 <option value="">Select your city</option>
                 {selectedCities &&
                   selectedCities.towns.map((item) => (
-                    <option value={item}>{item}</option>
+                    <option key={item} value={item}>{item}</option>
                   ))}{" "}
               </select>
               {errors.city && (

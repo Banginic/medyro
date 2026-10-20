@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { protectWithArcjet } from "@/lib/protectWithArcjet";
 import { ContextType } from "./context";
-import { validate as isUuid } from "uuid";
+
 
 type ProcedureOptions<T> = {
   schema: z.ZodType<T>;
@@ -27,7 +27,7 @@ function formDataToObject(formData: FormData): Record<string, any> {
 const JSON_FIELDS = ["schedule"];
 
 function normalizeFormData(input: Record<string, any>) {
-  const stringFields = ["phone", "phoneNumber", "whatsapp"];
+  const stringFields = ["phone", "phoneNumber", "whatsapp", 'whatsApp'];
   const result: any = {};
 
   for (const key in input) {

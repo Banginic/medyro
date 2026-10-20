@@ -1,0 +1,2 @@
+ALTER TABLE "on_call_schedule" ADD COLUMN "pharmacy_id" uuid NOT NULL;--> statement-breakpoint
+ALTER TABLE "on_call_schedule" ADD CONSTRAINT "on_call_schedule_pharmacy_id_pharmacies_id_fk" FOREIGN KEY ("pharmacy_id") REFERENCES "public"."pharmacies"("id") ON DELETE cascade ON UPDATE no action;

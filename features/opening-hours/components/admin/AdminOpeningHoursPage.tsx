@@ -6,7 +6,7 @@ import { PlusCircle, Timer } from "lucide-react";
 import { useState } from "react";
 import { getOpeningHours } from "../../actions/getOpeningHours";
 import OpeningHourForm from "../../forms/OpeningHourForm";
-import AdminOpeningHourCard from "./AdminOpeningHourCard";
+import OpeningHourCard from "../OpeningHourCard";
 import Link from "next/link";
 
 function AdminOpeningHoursPage() {
@@ -23,7 +23,7 @@ function AdminOpeningHoursPage() {
         <Button asChild variant={"outline"}>
           <Link href={"/pharmacy/programs"}>
             <Timer />
-            Opening Hours
+            Oncall
           </Link>
         </Button>
         <Button onClick={() => setForm(true)}>
@@ -43,7 +43,7 @@ function AdminOpeningHoursPage() {
             <ul>
               {hours.map((hour, index) => (
                 <li key={index}>
-                  <AdminOpeningHourCard openingHour={hour}/>
+                  <OpeningHourCard openingHour={hour}/>
                 </li>
               ))}
             </ul>

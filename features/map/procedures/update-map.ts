@@ -1,42 +1,59 @@
-import { eq, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { createProcedure } from "@/server/procedure";
 import { pharmacies } from "@/drizzle/schema";
 import { MapSchema } from "../schemas/mapSchema";
 
-//................................................................................................
 export const updateMap = createProcedure({
   schema: MapSchema,
   protectClient: true,
+
   handler: async ({ context, input }) => {
     const userId = context.session?.user.id;
 
     if (!userId) {
-      return "NotFound";
+      return "Unauthorized";
     }
 
-    // Check existing data
-    const existData = await context.db
+    // Find the pharmacy belonging to the authenticated user.
+    const [pharmacy] = await context.db
       .select({
         id: pharmacies.id,
-        publicId: pharmacies.coverImagePublicId,
+        userId: pharmacies.userId,
       })
       .from(pharmacies)
-      .where(and(eq(pharmacies.userId, userId)))
+      .where(eq(pharmacies.userId, userId))
       .limit(1);
 
-    if (existData.length === 0) {
+    if (!pharmacy) {
       return "NotFound";
     }
 
-    const data = await context.db
+    // Update only the selected pharmacy.
+    const updated = await context.db
       .update(pharmacies)
       .set({
         latitude: input.latitude,
         longitude: input.longitude,
       })
-      .where(and(eq(pharmacies.id, existData[0].id)))
-      .returning();
+      .where(eq(pharmacies.id, pharmacy.id))
+      .returning({
+        id: pharmacies.id,
+        userId: pharmacies.userId,
+        latitude: pharmacies.latitude,
+        longitude: pharmacies.longitude,
+      });
 
-    return { data, status: 202 };
+
+
+    if (updated.length !== 1) {
+      throw new Error(
+        `Expected to update one pharmacy, but updated ${updated.length}.`,
+      );
+    }
+
+    return {
+      data: updated[0],
+      status: 202,
+    };
   },
 });

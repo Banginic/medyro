@@ -1,0 +1,1 @@
+ALTER TABLE "on_call_schedule" DROP CONSTRAINT "on_call_schedule_date_unique";

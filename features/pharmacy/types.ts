@@ -36,6 +36,7 @@ export interface RegionType {
 export interface PharmacyType {
   id: string;
   name: string;
+  userId: string;
   slug?: string;
   description?: string;
   logo?: string;

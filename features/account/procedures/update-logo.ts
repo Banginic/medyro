@@ -45,7 +45,7 @@ export const updateLogo = createProcedure({
         logo: secure_url,
         logoPublicId: public_id,
       })
-      .where(and(eq(pharmacies.id, existData[0].id)))
+      .where(eq(pharmacies.id, existData[0].id))
       .returning();
 
     return { data, status: 202 };
