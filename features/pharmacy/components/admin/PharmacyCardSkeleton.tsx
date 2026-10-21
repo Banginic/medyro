@@ -7,7 +7,7 @@ export default function PharmacyCardSkeleton() {
   return (
     <article
       aria-hidden
-      className="flex items-start gap-4 rounded-xl border border-emerald-950/10 bg-card p-2 lg:p-4"
+      className="flex items-start gap-4 rounded-xl border border-emerald-950/10 bg-foreground/30 p-2 lg:p-4"
     >
       {/* Logo */}
       <Skeleton className="size-14 shrink-0 rounded-lg" />

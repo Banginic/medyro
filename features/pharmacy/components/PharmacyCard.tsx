@@ -14,13 +14,13 @@ const STATUS: Record<PharmacyStatusType, { label: string; cls: string }> = {
 };
 
 export function PharmacyCard({
-  p,
+  pharmacy,
   distance,
 }: {
-  p: PharmacyType;
+  pharmacy: PharmacyType;
   distance?: number | undefined;
 }) {
-  const s = STATUS[p.status];
+  const s = STATUS[pharmacy.status];
   return (
     <article className="flex flex-col rounded-lg border bg-card p-5 transition-colors hover:border-primary/40">
       <div className="flex items-start gap-3">
@@ -32,8 +32,8 @@ export function PharmacyCard({
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="flex items-center gap-1.5 text-base font-bold">
-            <span className="truncate">{p.name}</span>
-            {p.verificationStatus && (
+            <span className="truncate">{pharmacy.name}</span>
+            {pharmacy.verificationStatus && (
               <BadgeCheck
                 className="size-4 shrink-0 text-primary"
                 aria-label="Verified by Medyro"
@@ -41,8 +41,8 @@ export function PharmacyCard({
             )}
           </h3>
           <p className="mt-0.5 flex items-center gap-1 text-sm text-muted-foreground">
-            <MapPin className="size-3.5" aria-hidden /> {p.address},{" "}
-            {p.city}
+            <MapPin className="size-3.5" aria-hidden /> {pharmacy.address},{" "}
+            {pharmacy.city}
             {distance != null && (
               <span className="ml-1">· {distance.toFixed(1)} km</span>
             )}
@@ -53,7 +53,7 @@ export function PharmacyCard({
         <span className={`rounded px-2 py-0.5 text-xs font-semibold ${s.cls}`}>
           {s.label}
         </span>
-        {p.verificationStatus ? (
+        {pharmacy.verificationStatus ? (
           <span className="rounded bg-accent px-2 py-0.5 text-xs font-semibold text-accent-foreground">
             Verified
           </span>
@@ -64,21 +64,21 @@ export function PharmacyCard({
         )}
       </div>
       <a
-        href={`tel:${p.phone.replace(/\s/g, "")}`}
+        href={`tel:${pharmacy.phone.replace(/\s/g, "")}`}
         className="mt-4 flex items-center gap-2 text-sm font-medium hover:text-primary"
       >
-        <Phone className="size-4 text-primary" aria-hidden /> {p.phone}
+        <Phone className="size-4 text-primary" aria-hidden /> {pharmacy.phone}
       </a>
       <div className="mt-5 grid grid-cols-2 gap-2 pt-1">
         <Button variant="outline" asChild>
-          <a href={`/pharmacies/${p.id}`}>View pharmacy</a>
+          <a href={`/pharmacies/${pharmacy.id}`}>View pharmacy</a>
         </Button>
         <Button asChild>
           <Link
-            href={directionsUrl(p)}
+            href={directionsUrl(pharmacy)}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Directions to ${p.name}`}
+            aria-label={`Directions to ${pharmacy.name}`}
           >
             <Navigation /> Directions
           </Link>

@@ -144,14 +144,7 @@ export default function OnCallCard({ onCall }: AdminOnCallCardProps) {
           </div>
 
           <div className="mt-auto flex items-center justify-between gap-2 border-t pt-3">
-            <p className="text-xs text-muted-foreground">
-              Ajoutée le{" "}
-              {new Date(onCall.createdAt).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
-            </p>
+           
           </div>
         </div>
       </motion.article>

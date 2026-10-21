@@ -96,7 +96,7 @@ const SignInForm = () => {
           <X />
         </Link>
       </Button>
-      <Card className=" p-4 lg:p-6 w-[98%] max-w-110 absolute">
+      <Card className=" w-[98%] max-w-110 absolute">
         <CardHeader>
           <CardTitle className="">Sign in</CardTitle>
           <CardDescription className="text-muted-foreground">

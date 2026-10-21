@@ -1,8 +1,10 @@
-import React from 'react'
+import FindPharmacyPage from '@/features/pharmacy/components/FindPharmacyPage'
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      <FindPharmacyPage />
+    </div>
   )
 }
 

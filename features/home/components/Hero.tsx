@@ -7,6 +7,7 @@ import { Clock, LocateFixed, MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { HeroSection } from "@/features/pharmacy/components/admin/HeroBackground";
+import Link from "next/link";
 
 /* ---------- Copy (French first; swap here for English) ---------- */
 const COPY = {
@@ -277,9 +278,11 @@ export default function Hero() {
                 <LocateFixed />
                 {locating ? COPY.locating : COPY.nearMe}
               </Button>
-              <Button size="lg" type="submit" className=" lg:flex-1 ">
+              <Button asChild size="lg" type="submit" className=" lg:flex-1 ">
+                <Link href={'/find-pharmacies'}>
                 <Search />
                 Find Pharmacy
+                </Link>
               </Button>
             </div>
           </form>

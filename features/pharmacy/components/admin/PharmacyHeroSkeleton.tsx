@@ -7,7 +7,7 @@ export default function PharmacyHeroSkeleton() {
       role="status"
       aria-busy="true"
       aria-live="polite"
-      className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14"
+      className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 p-4 lg:p-6 py-24 2xl:py-32 max-w-6xl mx-auto"
     >
       <span className="sr-only">Loading pharmacy…</span>
 
@@ -43,8 +43,8 @@ export default function PharmacyHeroSkeleton() {
 
       {/* Cover photo side */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
-        <Skeleton className="absolute inset-0 rounded-none" />
-        <Skeleton className="absolute bottom-4 left-4 h-8 w-24 rounded-full bg-card/60" />
+        <Skeleton className="absolute inset-0 rounded-none " />
+        <Skeleton className="absolute bottom-4 left-4 h-8 w-24 rounded-full " />
       </div>
     </section>
   );
