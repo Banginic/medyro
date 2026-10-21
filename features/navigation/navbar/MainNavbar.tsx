@@ -15,17 +15,17 @@ function MainNavbar() {
         className={`flex items-center justify-between lg:justify-around   px-4 lg:p-6 w-full`}
       >
         <Link href={"/"}>
-          <Logo textSize="lg:text-xl" logoSize={45} />
+          <Logo textSize="lg:text-xl" logoSize={150} />
         </Link>
 
         <Navlinks navlinks={mainNavlinks} />
 
         <div
-          className={` px-4 py-1.5 lg:px-2  bg-card border rounded-full flex items-center gap-4 lg:gap-6`}
+          className={` px-2 py-1.5 lg:px-2  bg-card border rounded-full flex items-center gap-4 lg:gap-6`}
         >
           {" "}
           <LanguagesToggler />
-          <Button size="sm" className=" lg:hidden" asChild>
+          <Button size="sm" className=" lg:hidden h-8 " asChild>
             <Link href={"/auth/sign-in"}>Login</Link>
           </Button>
           <Button
