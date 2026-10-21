@@ -34,7 +34,7 @@ export const updateAddress = createProcedure({
 
     const data = await context.db
       .update(pharmacies)
-      .set(filteredData)
+      .set({ ...filteredData, updatedAt: new Date() })
        .where(and(eq(pharmacies.id, existData[0].id)))
       .returning();
 

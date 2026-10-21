@@ -44,6 +44,7 @@ export const updateCoverImage = createProcedure({
       .set({
         coverImage: secure_url,
         coverImagePublicId: public_id,
+        updatedAt: new Date(),
       })
        .where(and(eq(pharmacies.id, existData[0].id)))
       .returning();
