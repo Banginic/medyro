@@ -50,18 +50,23 @@ function FindPharmacyForm({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="">
-            <Label htmlFor="region">Region</Label>
+            <Label htmlFor="region">
+              Region
+            </Label>
             <Select value={region} onValueChange={setRegion}>
-              <SelectTrigger className="w-full">
+              <SelectTrigger translate="no" className="w-full">
                 <SelectValue placeholder="Select your region" />
               </SelectTrigger>
               <SelectContent
+              translate="no"
                 position="popper"
                 avoidCollisions={false}
                 className="max-h-70 overflow-y-auto"
               >
                 <SelectGroup>
-                  <SelectLabel>Regions</SelectLabel>
+                  <SelectLabel>
+                    Regions
+                  </SelectLabel>
                   {CAMEROON_REGIONS.map((item) => (
                     <SelectItem key={item.name} value={item.name}>
                       {item.name}
@@ -72,18 +77,22 @@ function FindPharmacyForm({
             </Select>
           </div>
           <div className="">
-            <Label htmlFor="region">Town / City</Label>
+            <Label htmlFor="region">
+              Town / City
+            </Label>
             <Select
               value={city}
               onValueChange={setCity}
               disabled={!selectedRegion?.towns}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger translate="no" className="w-full">
                 <SelectValue placeholder="Select your city" />
               </SelectTrigger>
-              <SelectContent className="max-h-60 overflow-y-auto">
+              <SelectContent translate="no" className="max-h-60 overflow-y-auto">
                 <SelectGroup>
-                  <SelectLabel>Cities</SelectLabel>
+                  <SelectLabel>
+                    Cities
+                  </SelectLabel>
                   {selectedRegion?.towns.map((item) => (
                     <SelectItem key={item} value={item}>
                       {item}
