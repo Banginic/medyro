@@ -9,7 +9,7 @@ import ProviderLayout from "./ProviderLayout";
 import GoogleTranslate from "@/i18n/components/GoogleTranslation";
 
 export const viewport = {
-  themeColor: "#04470a",
+  themeColor: "#005ee3",
 };
 const inter = Inter({
   variable: "--font-body",
