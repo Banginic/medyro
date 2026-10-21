@@ -203,7 +203,7 @@
    @apply text-sm sm:text-base md:text-lg px-6 py-3 md:px-8 md:py-4 font-medium;
   }
   .section-text {
-   @apply  text-sm  lg:text-[0.89rem] 2xl:text-[0.92rem]  leading-relaxed;
+   @apply  text-[14px] lg:text-[16px] leading-[1.6] font-normal ;
   }
   .section-description {
    @apply mt-3 text-sm  lg:text-[0.92rem] 2xl:text-[0.97rem]  text-muted-foreground leading-relaxed max-w-3xl;
@@ -212,7 +212,7 @@
    @apply text-[1.3rem] md:text-[1.7rem] font-semibold tracking-tighter leading-[120%] mb-3 text-center  ;
   }
   .card-title {
-   @apply text-lg leading-[130%];
+   @apply text-lg font-semibold leading-[130%];
   }
   .small {
   @apply  text-xs  font-normal;
@@ -224,10 +224,10 @@
    @apply  text-2xl md:text-2xl lg:text-3xl font-semibold tracking-tight;
   }
   .subtitle {
-    @apply text-sm  md:leading-normal font-normal text-balance mx-auto text-center;
+    @apply text-sm lg:text-base md:leading-normal font-normal text-balance ;
   }
   .page-text {
-   @apply text-xs lg:text-sm leading-[1.6] font-normal ;
+   @apply text-sm lg:text-[15px] leading-[1.6] font-normal ;
   }
    .section-padding {
     @apply px-4 sm:px-6 lg:px-8;

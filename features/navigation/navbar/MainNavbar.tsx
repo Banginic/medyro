@@ -12,7 +12,7 @@ function MainNavbar() {
   return (
     <div className="max-w-7xl mx-auto h-[8dvh] lg:h-[12dvh] flex py-10 items-center relative  ">
       <nav
-        className={`flex items-center justify-between lg:justify-around  px-4 lg:p-6 w-full`}
+        className={`flex items-center justify-between lg:justify-around   px-4 lg:p-6 w-full`}
       >
         <Link href={"/"}>
           <Logo textSize="lg:text-xl" logoSize={45} />
@@ -21,15 +21,19 @@ function MainNavbar() {
         <Navlinks navlinks={mainNavlinks} />
 
         <div
-          className={` px-4 py-1 lg:p-0 lg:bg-transparent rounded-full flex items-center gap-4 lg:gap-6`}
-        >  <LanguagesToggler />
-      
-       
-          <Button size='sm' className=" lg:hidden" asChild>
+          className={` px-4 py-1.5 lg:px-2  bg-card border rounded-full flex items-center gap-4 lg:gap-6`}
+        >
+          {" "}
+          <LanguagesToggler />
+          <Button size="sm" className=" lg:hidden" asChild>
             <Link href={"/auth/sign-in"}>Login</Link>
           </Button>
-       
-          <Button variant={'outline'} className="hidden lg:flex" size={"sm"} asChild>
+          <Button
+            variant={"outline"}
+            className="hidden lg:flex "
+            size={"sm"}
+            asChild
+          >
             <Link href={"/auth/sign-in"}>Login</Link>
           </Button>
           <Button className="hidden lg:flex" size={"sm"} asChild>

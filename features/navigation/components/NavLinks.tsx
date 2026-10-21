@@ -22,10 +22,10 @@ function Navlinks({ navlinks }: { navlinks: Props[] }) {
           <Link
             href={item.href}
             key={item.label}
-            className={`px-3 py-1 rounded-md font-medium  transition-colors ${
+            className={`px-3 py-1 rounded-full   transition-colors ${
               isActive
                 ? "text-primary bg-green-500/10 font-semibold  backdrop-blur-2xl"
-                : "text-muted-foreground hover:text-foreground page-text"
+                : "text-muted-foreground hover:text-foreground "
             }`}
           >
             {item.label}

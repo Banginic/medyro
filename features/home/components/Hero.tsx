@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-
 import { Clock, LocateFixed, MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +15,7 @@ const COPY = {
     "Entrez votre adresse ou partagez votre position : nous affichons les pharmacies autour de vous, avec la distance et leurs horaires.",
   placeholder: "Rechercher une adresse",
   hint: "Exemple : rue Joss, Akwa",
-  nearMe: "Autour de moi",
+  nearMe: "Use my location",
   find: "Trouver",
   locating: "Localisation en cours…",
   geoError:
@@ -239,7 +238,7 @@ export default function Hero() {
           >
             {COPY.title}
           </h1>
-          <p className="mt-5 max-w-md text-sm 2xl:text-base text-center lg:text-left  leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w- subtitle text-center lg:text-left  leading-relaxed text-muted-foreground">
             {COPY.subtitle}
           </p>
 
@@ -262,7 +261,7 @@ export default function Hero() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={COPY.placeholder}
                 autoComplete="street-address"
-                className="rounded-xl  pl-12 "
+                className=" pl-12 "
               />
             </div>
 
