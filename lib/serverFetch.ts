@@ -24,7 +24,7 @@ export default async function serverFetch<T>(
 
   const { endpoint, method, title, params } = props;
   try {
-    const apiUrl = process.env.API_URL || env.api_url;
+    const apiUrl = process.env.API_URL!;
     const response = await fetch(
       `${apiUrl}${endpoint}?lang=${env.lang}${params ?? ""}`,
       {

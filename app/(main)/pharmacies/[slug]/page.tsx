@@ -28,6 +28,7 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
   if (!data || !data.data || data.data.length === 0) {
     notFound();
   }
+
   return (
     <div className="">
       <h1 className="sr-only">{data?.data[0].name}</h1>

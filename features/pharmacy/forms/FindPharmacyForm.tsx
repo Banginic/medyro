@@ -45,7 +45,7 @@ function FindPharmacyForm({
     <>
       <Card className="p-6 rounded-2xl border ">
         <CardHeader>
-          <CardTitle>Find a pharmacy in your area</CardTitle>
+          <CardTitle className="card-title">Find a pharmacy in your area</CardTitle>
           <CardDescription> Select your your region and town</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
