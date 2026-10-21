@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { Clock, LocateFixed, MapPin, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Clock, MapPin } from "lucide-react";
 import { HeroSection } from "@/features/pharmacy/components/admin/HeroBackground";
-import Link from "next/link";
+import SearchPage from "./SearchPage";
 
 /* ---------- Copy (French first; swap here for English) ---------- */
 const COPY = {
@@ -195,45 +191,12 @@ function DoualaMap() {
 
 /* ---------- Hero ---------- */
 export default function Hero() {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [locating, setLocating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  function handleFind(e: React.FormEvent) {
-    e.preventDefault();
-    const q = query.trim();
-    if (!q) return;
-    router.push(`/pharmacies?q=${encodeURIComponent(q)}`);
-  }
-
-  function handleNearMe() {
-    setError(null);
-    if (!("geolocation" in navigator)) {
-      setError(COPY.geoError);
-      return;
-    }
-    setLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        setLocating(false);
-        router.push(
-          `/pharmacies?lat=${coords.latitude}&lng=${coords.longitude}`,
-        );
-      },
-      () => {
-        setLocating(false);
-        setError(COPY.geoError);
-      },
-      { enableHighAccuracy: true, timeout: 10000 },
-    );
-  }
-
   return (
     <HeroSection>
-      <section className="mx-auto grid min-h-[100svh] max-w-7xl 2xl:items-center  gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14 lg:py-16">
+      <section className="mx-auto grid min-h-[100svh] max-w-7xl 2xl:items-center  gap-10 px- py-12 sm:px-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14 lg:py-16">
         {/* Left: message + search */}
-        <div className="max-w-xl mt-12 2xl:mt-0">
+
+        <div className="max-w-xl mt-12 2xl:mt-0 ">
           <h1
             className={`font-display text-[2.4rem] text-center lg:text-left font-semibold leading-[1.05] tracking-tight lg:text-[3rem] 2xl:text-[4rem]`}
           >
@@ -244,48 +207,7 @@ export default function Hero() {
           </p>
 
           {/* FORM====================================================================== */}
-          <form
-            onSubmit={handleFind}
-            className="mt-8 rounded-2xl border border-primary/20 bg-card p-4 "
-          >
-            <label htmlFor="address" className="sr-only">
-              {COPY.placeholder}
-            </label>
-            <div className="relative">
-              <MapPin
-                aria-hidden
-                className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#0F6B3F]"
-              />
-              <Input
-                id="address"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={COPY.placeholder}
-                autoComplete="street-address"
-                className=" pl-12 "
-              />
-            </div>
-
-            <div className="mt-3 flex flex-col gap-3 lg:flex-row ">
-              <Button
-                type="button"
-                variant="outline"
-
-                onClick={handleNearMe}
-                disabled={locating}
-                className=" lg:flex-1 "
-              >
-                <LocateFixed />
-                {locating ? COPY.locating : COPY.nearMe}
-              </Button>
-              <Button asChild size="lg" type="submit" className=" lg:flex-1 ">
-                <Link href={'/find-pharmacies'}>
-                <Search />
-                Find Pharmacy
-                </Link>
-              </Button>
-            </div>
-          </form>
+          <SearchPage />
         </div>
 
         {/* Right: map illustration */}

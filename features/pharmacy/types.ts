@@ -66,11 +66,12 @@ export interface PharmacyTypes extends APIResponse {
 }
 
 export interface NearbyPharmacySearchParams {
-  city: string;
+  city?: string;
+  query?: string;
   limit?: number;
   excludedId?: string;
-  latitude?: number;
-  longitude?: number;
+  latitude?: number | undefined;
+  longitude?: number | undefined;
 }
 
 export const CITIES = [

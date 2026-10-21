@@ -1,12 +1,13 @@
 import { createProcedure } from "@/server/procedure";
 import { z } from "zod";
 import { pharmacies } from "@/drizzle/schema";
-import { and, asc, eq, getTableColumns, ne, sql } from "drizzle-orm";
+import { and, asc, eq, getTableColumns, ne, sql, ilike, or } from "drizzle-orm";
 
 //................................................................................................
 export const getActivePharmacies = createProcedure({
   schema: z.object({
-    city: z.string(),
+    city: z.string().optional(),
+    query: z.string().optional(),
     excludedId: z.string().optional(),
     limit: z.number().optional(),
     latitude: z.number().optional(),
@@ -14,13 +15,38 @@ export const getActivePharmacies = createProcedure({
   }),
 
   handler: async ({ context, input }) => {
-    const conditions = [
-      eq(pharmacies.isActive, true),
-      sql`lower(trim(${pharmacies.city})) = lower(trim(${input.city}))`,
-    ];
+    const conditions = [eq(pharmacies.isActive, true), ];
 
+    // CITIES=============================================
+    if (input.city) {
+      conditions.push(
+        sql`lower(trim(${pharmacies.city})) = lower(trim(${input.city}))`,
+      );
+    }
+
+    // EXCLUDED PHARAMACIES================================
     if (input.excludedId) {
       conditions.push(ne(pharmacies.id, input.excludedId));
+    }
+    // SEARCH QUERY=======================================
+    if (input.query?.trim()) {
+      const terms = input.query
+        .trim()
+        .split(/[\s,]+/)
+        .filter(Boolean);
+
+      for (const term of terms) {
+        // escape LIKE wildcards so "%" or "_" typed by the user are treated as plain text
+        const pattern = `%${term.replace(/[%_\\]/g, "\\$&")}%`;
+
+        conditions.push(
+          or(
+            ilike(pharmacies.name, pattern),
+            ilike(pharmacies.city, pattern),
+            ilike(pharmacies.address, pattern),
+          )!,
+        );
+      }
     }
 
     const sameCity = and(...conditions);
