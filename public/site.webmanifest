@@ -1,7 +1,8 @@
 {
-  "name": "Geena Pharmacy LTD",
-  "short_name": "Geena Pharmacy",
-"description": "Geena Pharmacy provides trusted medications, healthcare products, wellness essentials, pharmacy services, and reliable health information for you and your family.",  "start_url": "/",
+  "name": "Medyro - Pharmacy Finder",
+  "short_name": "Medyro",
+"description": "Find nearby pharmacies quickly and easily with Medyro. Discover pharmacy locations and access essential pharmacy information wherever you are.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#005ee3",

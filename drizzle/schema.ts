@@ -78,6 +78,7 @@ export const pharmacies = pgTable("pharmacies", {
   verificationStatus: verificationStatusEnum().default("pending"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const onCallSchedule = pgTable("on_call_schedule", {

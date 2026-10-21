@@ -1,21 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+"use client";
 import { DataRenderer } from "@/components/index";
 import PharmacyDetails from "./PharmacyDetails";
-import { getPharmacyDetails } from "../actions/getPharmacyDetails";
 import PharmacyHeroSkeleton from "./admin/PharmacyHeroSkeleton";
+import { PharmacyTypes } from "../types";
 
-function PharmacyDetailsPage({ slug }: { slug: string }) {
-  const { data, isFetching, isError } = useQuery({
-    queryKey: [slug],
-    queryFn: () => getPharmacyDetails(slug),
-  });
+function PharmacyDetailsPage({
+  pharmacyData,
+}: {
+  pharmacyData: PharmacyTypes;
+}) {
   return (
     <div>
       <DataRenderer
         title="pharmacy details"
-        data={data?.data}
-        isError={isError}
-        isLoading={isFetching}
+        isError={!pharmacyData || !pharmacyData.data}
+        data={pharmacyData?.data}
         loader={<PharmacyHeroSkeleton />}
       >
         {(pharmacies) => <PharmacyDetails pharmacies={pharmacies} />}

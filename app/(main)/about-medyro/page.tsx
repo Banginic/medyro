@@ -1,4 +1,7 @@
-import React from 'react'
+import { AboutMetadata } from "@/features/about/metadata/aboutMetadata";
+
+export const metadata = AboutMetadata
+
 
 function page() {
   return (

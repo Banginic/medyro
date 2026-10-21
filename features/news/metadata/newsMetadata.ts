@@ -1,65 +1,14 @@
-const websiteURL = process.env.BASE_URL!;
+import { createPageMetadata } from "@/metadata/createMetadata";
 
 const metadataDetails = {
-  title:
-    "Geena Pharmacy News - Latest Health Tips, Pharmacy Updates & Announcements",
+  title: "Actualités santé et pharmacie au Cameroun | Medyro",
   description:
-    "Stay informed with the latest news from Geena Pharmacy. Discover health tips, pharmacy updates, wellness information, product announcements, and important healthcare insights.",
-  authors: "Geena Pharmacy LTD",
-  creator: "Geena Pharmacy LTD",
-  publisher: "Geena Pharmacy LTD",
-  applicationName: "Geena Pharmacy",
-  og_description:
-    "Explore the latest health tips, pharmacy updates, wellness advice, product announcements, and healthcare information from Geena Pharmacy.",
-  twitter_og_description:
-    "Stay updated with Geena Pharmacy for the latest health tips, wellness advice, pharmacy news, healthcare insights, and important announcements.",
-  twitter_handler: "https://x.com/geenapharmacy",
+    "Suivez les dernières actualités de Medyro : informations sur les pharmacies, conseils santé, nouveautés de la plateforme et actualités du secteur pharmaceutique au Cameroun.",
+  path: "/news",
+  ogDescription:
+    "Restez informé avec Medyro : actualités santé, conseils pratiques et nouveautés du secteur pharmaceutique au Cameroun.",
+  twitterDescription:
+    "Actualités santé, conseils et nouveautés pharmacie au Cameroun, à suivre sur Medyro.",
 };
 
-export const NewsMetadata = {
-  title: metadataDetails.title,
-  description: metadataDetails.description,
-  authors: [{ name: metadataDetails.authors, url: websiteURL + "/news" }],
-  creator: metadataDetails.creator,
-  metadataBase: new URL(websiteURL),
-  publisher: metadataDetails.publisher,
-  applicationName: metadataDetails.applicationName,
-
-  openGraph: {
-    type: "website",
-    title: metadataDetails.title,
-    description: metadataDetails.og_description,
-    url: websiteURL + "/news",
-    siteName: metadataDetails.applicationName,
-    images: [
-      {
-        url: websiteURL + "/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Banginic logo",
-      },
-    ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: metadataDetails.title,
-    description: metadataDetails.twitter_og_description,
-    creator: metadataDetails.twitter_handler,
-    images: [websiteURL + "/logo.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-
-  manifest: "/site.webmanifest",
-};
+export const NewsMetadata = createPageMetadata(metadataDetails);

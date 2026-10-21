@@ -4,9 +4,18 @@ import { Inter, Bricolage_Grotesque } from "next/font/google";
 import ReCaptchaProvider from "@/providers/ReCaptchaProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import { HomeMetadata } from "@/features/home/metadata/homeMetadata";
 import ProviderLayout from "./ProviderLayout";
 import GoogleTranslate from "@/i18n/components/GoogleTranslation";
+import {
+  createPersonStructuredData,
+  createWebsiteStructuredData,
+} from "@/metadata/structuredData";
+import { baseMetadata } from "@/metadata/baseMetadata";
+
+const structuredData = [
+  createWebsiteStructuredData(),
+  createPersonStructuredData(),
+];
 
 export const viewport = {
   themeColor: "#005ee3",
@@ -23,7 +32,7 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-export const metadata = HomeMetadata;
+export const metadata = baseMetadata;
 
 export default function RootLayout({
   children,
@@ -36,7 +45,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${bricolage}  antialiased`}
     >
-      <head></head>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </head>
 
       <body
         className={`relative min-h-screen w-full font-body page-text 
