@@ -55,7 +55,7 @@ export default function PharmacyDetails({
   const isVerified = pharmacy.verificationStatus?.toLowerCase() === "verified";
   const website = pharmacy.website ? normalizeUrl(pharmacy.website) : null;
   const phoneDigits = String(pharmacy.phone ?? "").replace(/\s/g, "");
-  const whatsappDigits = String(pharmacy.whatsapp ?? "").replace(/\D/g, "");
+  const whatsappDigits = String(pharmacy.whatsApp ?? "").replace(/\D/g, "");
 
   const hasCoords =
     pharmacy.latitude != null &&
@@ -180,8 +180,8 @@ export default function PharmacyDetails({
                     <Image
                       src="/icons/whatsapp.png"
                       alt=""
-                      width={18}
-                      height={18}
+                      width={22}
+                      height={22}
                     />
                     WhatsApp
                   </a>

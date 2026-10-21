@@ -1,7 +1,7 @@
 import { createProcedure } from "@/server/procedure";
 import { z } from "zod";
-import { pharmacies } from "@/drizzle/schema";
-import { and, asc, eq, getTableColumns, ne, sql } from "drizzle-orm";
+import { onCallSchedule, pharmacies } from "@/drizzle/schema";
+import { and, asc, desc, eq,  ne, sql } from "drizzle-orm";
 
 //................................................................................................
 export const getNearbyPharmacies = createProcedure({
@@ -33,8 +33,22 @@ export const getNearbyPharmacies = createProcedure({
 
     if (!hasCoords) {
       const data = await context.db
-        .select()
+        .select({
+          id: pharmacies.id,
+          name: pharmacies.name,
+          slug: pharmacies.slug,
+          logo: pharmacies.logo,
+          address: pharmacies.address,
+          onCallToday: onCallSchedule.date,
+        })
         .from(pharmacies)
+        .leftJoin(
+          onCallSchedule,
+          and(
+            eq(onCallSchedule.pharmacyId, pharmacies.id),
+            sql`${onCallSchedule.date} = CURRENT_DATE`,
+          ),
+        )
         .where(sameCity)
         .orderBy(asc(pharmacies.name))
         .limit(input.limit ?? 5);
@@ -55,12 +69,28 @@ export const getNearbyPharmacies = createProcedure({
 
     const data = await context.db
       .select({
-        ...getTableColumns(pharmacies),
+        id: pharmacies.id,
+        slug: pharmacies.slug,
+        name: pharmacies.name,
+        logo: pharmacies.logo,
+        address: pharmacies.address,
         distanceKm,
+        onCallToday: onCallSchedule.date,
       })
       .from(pharmacies)
+      .leftJoin(
+        onCallSchedule,
+        and(
+          eq(onCallSchedule.pharmacyId, pharmacies.id),
+          sql`${onCallSchedule.date} = CURRENT_DATE`,
+        ),
+      )
       .where(sameCity)
-      .orderBy(sql`${distanceKm} asc nulls last`, asc(pharmacies.name))
+      .orderBy(
+        desc(sql`(${onCallSchedule.pharmacyId} IS NOT NULL)`),
+        sql`${distanceKm} ASC NULLS LAST`,
+        asc(pharmacies.name),
+      )
       .limit(input.limit ?? 5);
 
     return { data };

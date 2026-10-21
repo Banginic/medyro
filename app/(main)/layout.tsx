@@ -3,7 +3,6 @@
 import React from "react";
 import { News } from "@/components/index";
 import MainNavbar from "@/features/navigation/navbar/MainNavbar";
-import OnCallToday from "@/features/programs/components/OnCallToday";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +11,6 @@ function MainLayout({ children }: { children: React.ReactNode }) {
     >
       <header className="fixed top-0 left-0  right-0 z-100 ">
         <News />
-        <OnCallToday />
 
         <div className=" rounded-b-2xl shadow backdrop-blur-2xl bg-[url('/images/geena-bg.png')] bg-cover bg-center ">
           <MainNavbar />

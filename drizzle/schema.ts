@@ -104,6 +104,9 @@ export const openingHours = pgTable("open_hours", {
   userId: uuid("userId_id").references(() => users.id, {
     onDelete: "cascade",
   }),
+  pharmacyId: uuid("pharmacy_id").references(() => pharmacies.id, {
+    onDelete: "cascade",
+  }),
   isActive: boolean().notNull().default(true),
   schedule: jsonb("schedule").$type<OpeningHourType[]>().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

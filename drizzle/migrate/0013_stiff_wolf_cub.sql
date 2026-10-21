@@ -1,0 +1,2 @@
+ALTER TABLE "open_hours" ADD COLUMN "pharmacy_id" uuid;--> statement-breakpoint
+ALTER TABLE "open_hours" ADD CONSTRAINT "open_hours_pharmacy_id_pharmacies_id_fk" FOREIGN KEY ("pharmacy_id") REFERENCES "public"."pharmacies"("id") ON DELETE cascade ON UPDATE no action;

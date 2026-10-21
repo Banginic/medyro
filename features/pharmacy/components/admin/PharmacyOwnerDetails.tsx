@@ -55,7 +55,7 @@ export default function PharmacyOwnerDetails({
   const isVerified = pharmacy.verificationStatus?.toLowerCase() === "verified";
   const website = pharmacy.website ? normalizeUrl(pharmacy.website) : null;
   const phoneDigits = String(pharmacy.phone ?? "").replace(/\s/g, "");
-  const whatsappDigits = String(pharmacy.whatsapp ?? "").replace(/\D/g, "");
+  const whatsappDigits = String(pharmacy.whatsApp ?? "").replace(/\D/g, "");
 
   const hasCoords =
     pharmacy.latitude != null &&
@@ -107,12 +107,7 @@ export default function PharmacyOwnerDetails({
                 >
                   {today}
                 </p>
-                {isVerified && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-950 dark:text-emerald-200 dark:ring-emerald-800">
-                    <BadgeCheck className="size-3.5" aria-hidden />
-                    Verified pharmacy
-                  </span>
-                )}
+              
               </div>
             </div>
 
@@ -179,8 +174,8 @@ export default function PharmacyOwnerDetails({
                     <Image
                       src="/icons/whatsapp.png"
                       alt=""
-                      width={18}
-                      height={18}
+                      width={22}
+                      height={22}
                     />
                     WhatsApp
                   </a>
@@ -254,7 +249,7 @@ export default function PharmacyOwnerDetails({
       </div>
       <div className=" flex flex-col lg:flex-row justify-between gap-4 max-w-5xl mx-auto border rounded-2xl bg-card">
         <OnCallPage pharmacyId={pharmacy.id} />
-        <OpeningHourPage pharmacyId={pharmacy.userId} />
+        <OpeningHourPage pharmacyId={pharmacy.id} />
       </div>
     </main>
   );

@@ -19,6 +19,7 @@ function FindPharmacyPage() {
     enabled: !!searchCity,
   });
 
+
   const hasSearched = !!searchCity;
   const showForm = !hasSearched || isFetching;
   const noResults = isError || !data?.data || data.data.length === 0;
@@ -53,7 +54,7 @@ function FindPharmacyPage() {
       </div>
 
       {/* Image (bottom on mobile, right on desktop) */}
-      <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg: h-100 lg:w-3/5 2xl:w-3/5">
+      <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl shadow-lg lg:aspect-auto lg: h-120 2xl:h-130 lg:w-3/5 2xl:w-3/5">
         <Image
           src="/images/pharmacy-image.avif"
           alt="Find a pharmacy near you"

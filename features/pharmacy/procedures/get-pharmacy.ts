@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import { createProcedure } from "@/server/procedure";
 import { z } from "zod";
 import { pharmacies } from "@/drizzle/schema";
@@ -12,8 +12,12 @@ export const getPharmacy = createProcedure({
   handler: async ({ context, input }) => {
     // Find existing data
 
+    const { userId, ...selectedColumns } = getTableColumns(pharmacies);
+
     const data = await context.db
-      .select()
+      .select({
+        ...selectedColumns,
+      })
       .from(pharmacies)
       .where(eq(pharmacies.slug, input.id))
       .limit(1);
@@ -25,4 +29,3 @@ export const getPharmacy = createProcedure({
     return { data };
   },
 });
-

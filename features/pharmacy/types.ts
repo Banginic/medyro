@@ -55,9 +55,10 @@ export interface PharmacyType {
   latitude: number;
   longitude: number;
   status: PharmacyStatusType;
-  verificationStatus?: VerificationStatusType;
-  isActive?: boolean;
-  createdAt?: Date;
+  verificationStatus: VerificationStatusType;
+  isActive: boolean;
+  onCallToday: Date;
+  createdAt: Date;
 }
 
 export interface PharmacyTypes extends APIResponse {
