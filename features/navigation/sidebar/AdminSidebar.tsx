@@ -1,19 +1,12 @@
 'use client'
 import {
-  House,
   LogOut,
-  MessageCircle,
   Settings,
-  Users,
-  BookOpenText,
-  Lock,
-  Star,
-  Grid,
-  Newspaper,
-  Image,
   Pill,
-  Timer,
-  Briefcase,
+  LayoutDashboard,
+  MessagesSquare,
+  Newspaper,
+  NotebookPen,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -30,20 +23,13 @@ function AdminSidebar({
   const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL!
 const pathname = usePathname()
 
-  const SIDELINKS = [
-    { name: "Home", Icon: House, href: adminUrl },
-    { name: "Products", Icon: Pill, href: `${adminUrl}/products` },
-    { name: "Messages", Icon: MessageCircle, href: `${adminUrl}/messages` },
-    { name: "On-Call", Icon: Timer, href: `${adminUrl}/programs` },
-    { name: "News Update", Icon: Newspaper, href: `${adminUrl}/news` },
-    { name: "Blogs", Icon: BookOpenText, href: `${adminUrl}/blogs` },
-    { name: "Employees", Icon: Users, href: `${adminUrl}/employees` },
-    { name: "Gallery", Icon: Image, href: `${adminUrl}/gallery` },
-    { name: "Categories", Icon: Grid, href: `${adminUrl}/categories` },
-    { name: "Admins", Icon: Lock, href: `${adminUrl}/admin-users` },
-    { name: "Jobs", Icon: Briefcase, href: `${adminUrl}/jobs`},
-    // { name: "Testimonials", Icon: Star, href: `${adminUrl}/testimonials`},
-  ] as const;
+ const SIDELINKS = [
+  { name: "Dashboard", Icon: LayoutDashboard, href: adminUrl },
+  { name: "Pharmacies", Icon: Pill, href: `${adminUrl}/products` },
+  { name: "Messages", Icon: MessagesSquare, href: `${adminUrl}/messages` },
+  { name: "News", Icon: Newspaper, href: `${adminUrl}/news` },
+  { name: "Blogs", Icon: NotebookPen, href: `${adminUrl}/blogs` },
+] as const;
 
   function closeSidebar() {
     setSidebar(false);

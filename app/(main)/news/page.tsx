@@ -14,8 +14,8 @@ async function page() {
     <div className="min-h-screen max-w-7xl mx-auto py-16 2xl:py-32">
       <div className="max-w-3xl mx-auto">
         <PageHeading
-          title="Latest Pharmacy News & Health Updates"
-          subtitle="Stay informed with the latest news, health tips, pharmacy updates, and important information from Geena Pharmacy."
+          title="News & Updates"
+          subtitle="Publish, manage, and share the latest news, announcements, and updates with your audience."
         />
 
         <NewsPage news={news} />

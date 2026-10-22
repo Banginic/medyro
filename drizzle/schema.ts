@@ -111,3 +111,19 @@ export const openingHours = pgTable("open_hours", {
   schedule: jsonb("schedule").$type<OpeningHourType[]>().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const blogs = pgTable("blogs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  author: varchar("author", { length: 255 }).notNull().default(""),
+  title: varchar("title", { length: 255 }).notNull().default(""), //tech, health, travel
+  likes: varchar("likes", { length: 255 }).notNull().default("12k"),
+  body: varchar("body", { length: 1000 }).notNull().default(""),
+  slug: varchar("slug", { length: 100 }).notNull(),
+  photo: varchar("photo", { length: 255 }).notNull().default(""),
+  photoPublicId: varchar("photo_public_id", { length: 255 })
+    .notNull()
+    .default(""),
+  avatar: varchar("avatar", { length: 255 }).notNull().default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
