@@ -2,7 +2,7 @@ export const websiteURL = process.env.BASE_URL!;
 
 export const METADATA_DETAILS = {
   projectInfo: {
-    name: "Medyro",
+    name: "Medyro Pharmacy Finder",
     author: "Medyro",
     url: websiteURL,
     logo: `${websiteURL}/logo.png`,

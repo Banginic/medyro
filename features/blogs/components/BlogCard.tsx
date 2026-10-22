@@ -21,7 +21,7 @@ function BlogCard({ blog }: { blog: BlogType }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ amount: 0.2, once: true }}
     >
-      <Card className="group overflow-hidden w-[98%] p-1 rounded-2xl mx-auto hover:shadow-lg bg-card transition-shadow duration-300 ">
+      <Card className="group overflow-hidden w-[98%] px-0 rounded-2xl mx-auto hover:shadow-lg bg-card transition-shadow duration-300 ">
         <div className="relative   rounded-xl overflow-hidden group-hover:scale-105  h-62  trans">
           <Image
             src={blog.photo}
@@ -32,17 +32,17 @@ function BlogCard({ blog }: { blog: BlogType }) {
 
         </div>
 
-        <CardHeader className="px-2.5 mt-4 mb-2">
+        <CardHeader className=" mt-4 mb-2">
           <h3 className="card-title font-display font-medium">{blog.title}</h3>
           <CardDescription className="flex items-center justify-between gap-2 text-muted-foreground">
             <h3 className="text-sm text-primary">{blog.author}</h3>
-            <span className="text-[11px] px-2 py-1 bg-muted rounded-full">
+            <span className="text-[11px]  py-1 bg-muted rounded-full">
                {new Date(blog.createdAt).toLocaleDateString("en-GB")}
             </span>
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="px-4">
+        <CardContent className="">
           <p className="text-muted-foreground mb-4 line-clamp-3">{blog.body}</p>
 
           <div className="flex items-center justify-between">

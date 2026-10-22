@@ -13,7 +13,7 @@ function RecentBlogs() {
     queryFn: () => getBlogs({ limit: 6 }),
   });
   return (
-    <section className="py-24 pt-32 relative">
+    <section className="py-24 pt-32 relative max-w-7xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -21,8 +21,8 @@ function RecentBlogs() {
         viewport={{ amount: 0.2, once: true }}
       >
         <SectionHeading
-          title="Health Tips & News"
-          subtitle="Practical advice, health updates, and news from the St. Sylvester team, to help you and your family make informed decisions about your well-being."
+          title="Health & Wellness Insights"
+          subtitle="Discover helpful health tips, pharmacy guides, and expert insights to make informed decisions about your health and well-being."
         />
       </motion.div>
 

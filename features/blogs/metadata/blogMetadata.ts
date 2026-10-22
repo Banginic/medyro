@@ -1,16 +1,18 @@
-
-
 import { createPageMetadata } from "@/metadata/createMetadata";
 
 const metadataDetails = {
-  title: "Health Tips & News - St. Sylvester Medical Foundation Blog",
+  title: "Health & Wellness Blog - Medyro Pharmacy Finder",
+
   description:
-    "Read practical health advice and updates from our doctors on pregnancy, child health, fertility and everyday wellness. St. Sylvester Medical Foundation, Douala.",
+    "Explore health tips, medication guides, pharmacy advice, and wellness articles on the Medyro Pharmacy Finder blog. Stay informed and make better healthcare decisions.",
+
   path: "/blogs",
+
   ogDescription:
-    "Read practical health advice and updates from our doctors on pregnancy, child health, fertility and everyday wellness. St. Sylvester Medical Foundation, Douala.",
+    "Discover practical health tips, medication guides, and wellness insights to help you make informed healthcare decisions with Medyro Pharmacy Finder.",
+
   twitterDescription:
-    "Read practical health advice and updates from our doctors on pregnancy, child health, fertility and everyday wellness. St. Sylvester Medical Foundation, Douala.",
+    "Explore health tips, medication guides, and wellness insights on the Medyro Pharmacy Finder blog.",
 };
 
 export const BlogMetadata = createPageMetadata(metadataDetails);

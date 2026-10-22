@@ -4,7 +4,7 @@ import { createPageMetadata } from "@/metadata/createMetadata";
 
 const metadataDetails = {
   title:
-    "Medyro | Trouvez une pharmacie ouverte près de vous au Cameroun",
+    "Medyro Pharmacy Finder - Trouvez une pharmacie ouverte près de vous au Cameroun",
   description:
     "Medyro est votre moteur de recherche de pharmacies au Cameroun. Localisez rapidement les pharmacies de garde et ouvertes autour de vous à Douala, Yaoundé et dans toutes les villes du pays, consultez leurs adresses, leurs horaires et contactez-les facilement.",
   path: "/",
