@@ -1,3 +1,5 @@
+'use client'
+
 import { PharmacyType } from "@/features/pharmacy/types";
 import PhotoSection from "./PhotoSection";
 import ProfileForm from "../forms/ProfileForm";

@@ -1,3 +1,6 @@
+"use client";
+
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +19,8 @@ import { QUERY_KEYS } from "@/features/query-keys";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { updateMap } from "../actions/updateMap";
+
+
 
 type Coordinates = {
   latitude: number;

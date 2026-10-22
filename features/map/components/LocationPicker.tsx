@@ -1,5 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 

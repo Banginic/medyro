@@ -1,12 +1,25 @@
 "use client";
+import dynamic from "next/dynamic";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PharmacyType } from "@/features/pharmacy/types";
 import { LocateFixed, MapPin,  } from "lucide-react";
 import { useState } from "react";
-import MapForm from "../forms/MapForm";
 import GetCurrentLocation from "./GetCurrentLocation";
+
+const DynamicMapForm = dynamic(
+  () => import("@/features/map/forms/MapForm"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-[300px] items-center justify-center rounded-lg bg-muted">
+        Loading map...
+      </div>
+    ),
+  },
+);
 
 function MapSection({ pharmacy }: { pharmacy: PharmacyType }) {
   const [showForm, setForm] = useState(false);
@@ -55,7 +68,7 @@ function MapSection({ pharmacy }: { pharmacy: PharmacyType }) {
       <>
         {showForm && (
           <div className="fixed inset-0 backdrop-blur-2xl bg-background/20 h-screen grid place-items-center py-8">
-            <MapForm closeForm={setForm} />
+            <DynamicMapForm closeForm={setForm} />
           </div>
         )}
         {showForm2 && (
