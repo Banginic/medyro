@@ -1,6 +1,6 @@
-import { eq, and } from "drizzle-orm";
+import { eq, } from "drizzle-orm";
 import { createProcedure } from "@/server/procedure";
-import { openingHours } from "@/drizzle/schema";
+import { openingHours, pharmacies } from "@/drizzle/schema";
 import { DailySchema } from "../schemas/OpeningHoursSchema";
 
 //................................................................................................
@@ -21,17 +21,26 @@ export const createOpeningHours = createProcedure({
       .where(eq(openingHours.userId, userId))
       .limit(1);
 
+    // DELETE DATA IF AVAILABLE========================================
     if (existData.length === 1) {
       await context.db
         .delete(openingHours)
         .where(eq(openingHours.userId, userId));
     }
 
+    //  FIND PHARMACY ID
+    const [pharmacy] = await context.db
+      .select({ id: pharmacies.id })
+      .from(pharmacies)
+      .where(eq(pharmacies.userId, userId))
+      .limit(1);
+
     const data = await context.db
       .insert(openingHours)
       .values({
-          schedule: input.schedule,
-          userId: userId,
+        userId,
+        schedule: input.schedule,
+        pharmacyId: pharmacy.id,
       })
       .returning();
 

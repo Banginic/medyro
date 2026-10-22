@@ -8,6 +8,7 @@ import {
   Newspaper,
   NotebookPen,
   Lock,
+  ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -29,6 +30,7 @@ const pathname = usePathname()
   { name: "Pharmacies", Icon: Pill, href: `${adminUrl}/pharmacies` },
   { name: "Admin Users", Icon: Lock, href: `${adminUrl}/admin-users` },
   { name: "Messages", Icon: MessagesSquare, href: `${adminUrl}/messages` },
+  { name: "Verifications", Icon: ShieldCheck, href: `${adminUrl}/verifications` },
   { name: "News", Icon: Newspaper, href: `${adminUrl}/news` },
   { name: "Blogs", Icon: NotebookPen, href: `${adminUrl}/blogs` },
 ] as const;

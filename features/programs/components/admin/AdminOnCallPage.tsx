@@ -22,7 +22,7 @@ function AdminOnCallPage({ params }: { params: OnCallSearchParamsType }) {
       <Title message="Call Days" />
       <section className="mt-8 flex justify-center lg:justify-end items-end gap-4 lg:gap-8 flex-wrap">
         <OnCallMonthlyFilter />
-        <Button asChild variant={"outline"}>
+        <Button asChild variant={"secondary"}>
           <Link href={"/pharmacy/opening-hours"}>
             <Timer />
             Opening Hours

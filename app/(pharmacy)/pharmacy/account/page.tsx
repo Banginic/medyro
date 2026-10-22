@@ -1,11 +1,11 @@
 'use client'
-// import AccountPage from '@/features/account/components/AccountPage';
+import AccountPage from '@/features/account/components/AccountPage';
 
 
 function page() {
   return (
     <div>
-      {/* <AccountPage /> */}
+      <AccountPage />
     </div>
   )
 }

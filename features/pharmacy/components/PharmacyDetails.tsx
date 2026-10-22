@@ -255,7 +255,7 @@ export default function PharmacyDetails({
       </div>
       <div className=" flex flex-col lg:flex-row justify-between gap-4 max-w-5xl mx-auto border rounded-2xl bg-card">
         <OnCallPage pharmacyId={pharmacy.id} />
-        <OpeningHourPage pharmacyId={pharmacy.userId} />
+        <OpeningHourPage pharmacyId={pharmacy.id} />
       </div>
     </main>
   );
