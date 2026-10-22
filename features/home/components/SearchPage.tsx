@@ -16,7 +16,7 @@ function SearchPage() {
 
   const [query, setQuery] = useState("");
 
-  const debouncedQuery = useDebounce(query.trim(), 400);
+  const debouncedQuery = useDebounce(query.trim());
  const hasQuery = debouncedQuery.length > 0;
 const hasLocation = location.latitude !== undefined;
 const hasSearched = hasQuery || hasLocation;

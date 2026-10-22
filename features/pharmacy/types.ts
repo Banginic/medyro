@@ -76,7 +76,7 @@ export interface NearbyPharmacySearchParams {
 }
 export interface AdminPharmacySearchParams {
   city?: string;
-  verificationStatus?: VerificationStatusType;
+  verificationStatus?: VerificationStatusType | string;
   query?: string;
   page?: number;
   limit?: number;

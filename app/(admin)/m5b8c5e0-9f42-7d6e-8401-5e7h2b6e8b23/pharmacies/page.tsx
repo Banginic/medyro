@@ -14,7 +14,7 @@ function Page({
     page: queries.page || 1,
     limit: queries.limit || 15,
     query: queries.query || '',
-    isVerified: queries.verificationStatus  || ''
+    verificationStatus: queries.verificationStatus  || ''
   };
   return <AdminPharmacyPage params={params} />;
 }

@@ -9,6 +9,9 @@ import { AdminPharmacySearchParams } from "../../types";
 import { getPharmacies } from "../../actions/getPharmacies";
 import { usePathname } from "next/navigation";
 import SuperAdminPharmacyCard from "./SuperAdminPharmacyCard";
+import CityFilter from "../../filters/CityFilter";
+import SearchFilter from "../../filters/SearchFilter";
+import VerificationFilter from "../../filters/VerificationFilter";
 
 function AdminPharmacyPage({ params }: { params: AdminPharmacySearchParams }) {
   const { data, isFetching, isError } = useQuery({
@@ -17,8 +20,24 @@ function AdminPharmacyPage({ params }: { params: AdminPharmacySearchParams }) {
   });
   const pathname = usePathname();
   return (
-    <div className="py-16 w-[98%] max-w-3xl mx-auto">
+    <div className="py-16 w-[98%] max-w-3xl mx-auto px-2">
       <Title message="Pharmacies" />
+      <section
+        aria-label="Filter pharmacies"
+        className="mt-8 rounded-2xl border border-accent/40 bg-card p-3 shadow-sm sm:p-4"
+      >
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:gap-4">
+          <div className="w-full lg:min-w-64 lg:flex-1">
+            <SearchFilter />
+          </div>
+
+          <CityFilter />
+
+          <div className="w-full lg:w-48">
+            <VerificationFilter />
+          </div>
+        </div>
+      </section>
       <section className="mt-12">
         <DataRenderer
           title="pharmacies"
