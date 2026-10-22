@@ -21,8 +21,8 @@ function BlogCard({ blog }: { blog: BlogType }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ amount: 0.2, once: true }}
     >
-      <Card className="group overflow-hidden w-[98%] px-0 rounded-2xl mx-auto hover:shadow-lg bg-card transition-shadow duration-300 ">
-        <div className="relative   rounded-xl overflow-hidden group-hover:scale-105  h-62  trans">
+      <Card className="group overflow-hidden w-[98%] p-2  rounded-2xl mx-auto hover:shadow-lg bg-card transition-shadow duration-300 ">
+        <div className="relative px-  rounded-xl overflow-hidden group-hover:scale-105  h-62  trans">
           <Image
             src={blog.photo}
             alt={blog.title}

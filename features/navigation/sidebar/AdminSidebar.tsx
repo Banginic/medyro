@@ -7,6 +7,7 @@ import {
   MessagesSquare,
   Newspaper,
   NotebookPen,
+  Lock,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -25,7 +26,8 @@ const pathname = usePathname()
 
  const SIDELINKS = [
   { name: "Dashboard", Icon: LayoutDashboard, href: adminUrl },
-  { name: "Pharmacies", Icon: Pill, href: `${adminUrl}/products` },
+  { name: "Pharmacies", Icon: Pill, href: `${adminUrl}/pharmacies` },
+  { name: "Admin Users", Icon: Lock, href: `${adminUrl}/admin-users` },
   { name: "Messages", Icon: MessagesSquare, href: `${adminUrl}/messages` },
   { name: "News", Icon: Newspaper, href: `${adminUrl}/news` },
   { name: "Blogs", Icon: NotebookPen, href: `${adminUrl}/blogs` },

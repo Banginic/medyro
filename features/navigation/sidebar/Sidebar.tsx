@@ -22,7 +22,7 @@ function Sidebar({ navlinks }: { navlinks: NavlinkTypes[] }) {
       <button
         aria-label="Close Menu"
         onClick={closeSidebar}
-        className="lg:hidden cursor-pointer hover:bg-muted/10 trans absolute top-4 right-4  rounded p-1 "
+        className="lg:hidden cursor-pointer hover:bg-muted/10 trans absolute top-4 right-4  rounded-full p-1 "
       >
         <X size={32} />
       </button>
@@ -39,7 +39,7 @@ function Sidebar({ navlinks }: { navlinks: NavlinkTypes[] }) {
               href={href}
               key={href}
               onClick={closeSidebar}
-              className={`w-[80%] mx-auto text-center text-[1rem] font-medium transition rounded-md ${
+              className={`w-[80%] mx-auto text-center text-[1rem] font-medium transition rounded-full ${
                 isActive
                   ? "text-primary-foreground bg-primary font-semibold"
                   : "hover:bg-primary/10 text-foreground "

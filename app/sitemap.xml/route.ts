@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/drizzle/index";
 import { escapeXml } from "@/lib/escapeXml";
-import { pharmacies } from "@/drizzle/schema";
+import { pharmacies, blogs } from "@/drizzle/schema";
 
 export const revalidate = 86400;
 
@@ -18,9 +18,15 @@ const STATIC_PAGES: SitemapEntry[] = [
   { path: "", priority: 1.0 },
   { path: "pharmacies", priority: 0.7 },
   { path: "about-medyro", priority: 0.6 },
+  { path: "blogs", priority: 0.8 },
+  { path: "faq", priority: 0.4 },
   { path: "news", priority: 0.3 },
   { path: "support", priority: 0.2 },
 ];
+
+function toIso(date: Date | string | null | undefined) {
+  return date ? new Date(date).toISOString() : undefined;
+}
 
 function buildXml(pages: SitemapEntry[]) {
   const body = pages
@@ -40,30 +46,55 @@ function buildXml(pages: SitemapEntry[]) {
 </urlset>`;
 }
 
-export async function GET() {
-  let pharmacyPages: SitemapEntry[] = [];
-
+async function getPharmacyPages(): Promise<SitemapEntry[]> {
   try {
     const rows = await db
       .select({ slug: pharmacies.slug, updatedAt: pharmacies.updatedAt })
       .from(pharmacies)
       .where(eq(pharmacies.isActive, true)); // adjust to your real "active" column
 
-    pharmacyPages = rows.map((pharmacy) => ({
+    return rows.map((pharmacy) => ({
       path: `pharmacies/${pharmacy.slug}`,
       priority: 0.9,
-      lastmod: pharmacy.updatedAt
-        ? new Date(pharmacy.updatedAt).toISOString()
-        : undefined,
+      lastmod: toIso(pharmacy.updatedAt),
     }));
   } catch (error) {
-    console.error("sitemap: failed to fetch dynamic pages from DB", error);
+    console.error("sitemap: failed to fetch pharmacy pages from DB", error);
+    return [];
   }
+}
 
-  return new NextResponse(buildXml([...STATIC_PAGES, ...pharmacyPages]), {
-    headers: {
-      "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=86400, stale-while-revalidate=86400",
+async function getBlogPages(): Promise<SitemapEntry[]> {
+  try {
+    const rows = await db
+      .select({ slug: blogs.slug, updatedAt: blogs.updatedAt })
+      .from(blogs);
+
+    return rows.map((blog) => ({
+      path: `blogs/${blog.slug}`,
+      priority: 0.7,
+      lastmod: toIso(blog.updatedAt),
+    }));
+  } catch (error) {
+    console.error("sitemap: failed to fetch blog pages from DB", error);
+    return [];
+  }
+}
+
+export async function GET() {
+  // Separate queries so one failing doesn't drop the other's pages
+  const [pharmacyPages, blogPages] = await Promise.all([
+    getPharmacyPages(),
+    getBlogPages(),
+  ]);
+
+  return new NextResponse(
+    buildXml([...STATIC_PAGES, ...pharmacyPages, ...blogPages]),
+    {
+      headers: {
+        "Content-Type": "application/xml",
+        "Cache-Control": "public, max-age=86400, stale-while-revalidate=86400",
+      },
     },
-  });
+  );
 }

@@ -27,7 +27,7 @@ function AdminNavbar({
             <p className="size-2 rounded-full absolute -top-1 -right-0.5 bg-red-400"></p>
           </Button>
          <div className="flex items-center gap-4">
-          <Logo logoSize={50} textSize=""/>
+          <Logo logoSize={120} textSize=""/>
           
         </div>
        

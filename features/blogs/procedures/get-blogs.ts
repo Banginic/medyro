@@ -20,7 +20,7 @@ export const getBlogs = createProcedure({
 
     const offset = (page - 1) * limit;
 
-    const cacheKey = ["blogs", page, search].join(":");
+    const cacheKey = ["medyro","blogs", page, search].join(":");
       
 
     const cached = await redisGet<{
