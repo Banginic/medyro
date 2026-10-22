@@ -74,6 +74,13 @@ export interface NearbyPharmacySearchParams {
   latitude?: number | undefined;
   longitude?: number | undefined;
 }
+export interface AdminPharmacySearchParams {
+  city?: string;
+  verificationStatus?: VerificationStatusType;
+  query?: string;
+  page?: number;
+  limit?: number;
+}
 
 export const CITIES = [
   "Douala",
