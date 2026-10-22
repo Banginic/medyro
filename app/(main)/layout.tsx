@@ -3,6 +3,7 @@
 import React from "react";
 import { News } from "@/components/index";
 import MainNavbar from "@/features/navigation/navbar/MainNavbar";
+import MainFooter from "@/features/footer/components/MainFooter";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,6 +18,9 @@ function MainLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <main className="mt-24 z-35">{children}</main>
+      <footer>
+        <MainFooter />
+      </footer>
     </div>
   );
 }

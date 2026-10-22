@@ -127,3 +127,46 @@ export const blogs = pgTable("blogs", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+export const contacts = pgTable("contact_details", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  projectId: uuid("project_id")
+    .notNull()
+    .references(() => projectInfo.id, { onDelete: "cascade" }),
+  whatsApp: varchar("whats_app", { length: 255 }).notNull().default(""),
+  email: varchar("email", { length: 255 }).notNull().default(""),
+  phone: varchar("phone", { length: 255 }).notNull().default(""),
+  facebook: varchar("facebook", { length: 255 }).notNull().default(""),
+  instagram: varchar("instagram", { length: 255 }).notNull().default(""),
+  tiktok: varchar("tiktok", { length: 255 }).notNull().default(""),
+  youTube: varchar("you_tube", { length: 255 }).notNull().default(""),
+  twitter: varchar("twitter", { length: 255 }).notNull().default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const projectInfo = pgTable("project_info", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  projectName: varchar("project_name", { length: 255 }).notNull().default(""),
+  tagLine: varchar("tag_line", { length: 255 }).notNull().default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const locations = pgTable("location", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  projectId: uuid("project_id")
+    .notNull()
+    .references(() => projectInfo.id, { onDelete: "cascade" }),
+  country: varchar({ length: 255 }).notNull().default(""),
+  state: varchar({ length: 255 }).notNull().default(""),
+  city: varchar({ length: 255 }).notNull().default(""),
+  address: varchar({ length: 255 }).notNull().default(""),
+  currency: varchar({ length: 255 }).notNull().default("USD"),
+  language: varchar({ length: 255 })
+    .notNull()
+    .default("English (United States)"),
+  mapPin: jsonb("map_pin").notNull().default({ lat: "", lgn: "" }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
