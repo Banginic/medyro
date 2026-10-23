@@ -2,8 +2,10 @@ import { pgEnum } from "drizzle-orm/pg-core";
 import { APIResponse, PaginationType } from "@/models/types";
 
 export type PharmacyStatusType = "on_call" | "open" | "closed" | "unconfirmed";
-export type VerificationStatusType = "pending" | "verified" | "rejected";
+export type VerificationStatusType =
+  "not-verified" | "pending" | "verified" | "rejected";
 export const VerificationStatusEnum = [
+  "not-verified",
   "pending",
   "verified",
   "rejected",

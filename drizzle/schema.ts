@@ -1,5 +1,5 @@
 import { UserRoleEnum } from "@/features/auth/types";
-import {OpeningHourType } from "@/features/opening-hours/schemas/OpeningHoursSchema";
+import { OpeningHourType } from "@/features/opening-hours/schemas/OpeningHoursSchema";
 import { RegionEnum } from "@/features/pharmacy/contants";
 import { VerificationStatusEnum } from "@/features/pharmacy/types";
 import {
@@ -13,6 +13,7 @@ import {
   pgEnum,
   doublePrecision,
   jsonb,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const userRoleEnum = pgEnum("user_role", UserRoleEnum);
@@ -75,7 +76,7 @@ export const pharmacies = pgTable("pharmacies", {
   address: varchar({ length: 255 }).notNull(),
   latitude: doublePrecision("latitude"),
   longitude: doublePrecision("longitude"),
-  verificationStatus: verificationStatusEnum().default("pending"),
+  verificationStatus: verificationStatusEnum().default("not-verified"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -86,7 +87,7 @@ export const onCallSchedule = pgTable("on_call_schedule", {
   userId: uuid("user_id").references(() => users.id, {
     onDelete: "cascade",
   }),
-   pharmacyId: uuid("pharmacy_id")
+  pharmacyId: uuid("pharmacy_id")
     .references(() => pharmacies.id, {
       onDelete: "cascade",
     })
@@ -169,4 +170,24 @@ export const locations = pgTable("location", {
   mapPin: jsonb("map_pin").notNull().default({ lat: "", lgn: "" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const verifications = pgTable("verifications", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  pharmacyId: uuid("pharmacy_id")
+    .references(() => pharmacies.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
+  userId: uuid("user_id")
+    .references(() => users.id, {
+      onDelete: "cascade",
+    })
+    .notNull(),
+  otp: integer().notNull(),
+  otpConfirmation: integer(),
+  whatsApp: varchar({ length: 255 }).notNull().unique(),
+  email: varchar({ length: 255 }).notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

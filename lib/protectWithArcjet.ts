@@ -54,7 +54,7 @@ export async function protectWithArcjet(
     );
   }
 
-  if ((decision.ip?.isHosting() ?? false) || (decision.results ?? []).some(isSpoofedBot)) {
+  if ( (decision.results ?? []).some(isSpoofedBot)) {
     return NextResponse.json(
       { success: false, message: "Forbidden", data: [] },
       { status: 403 }

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import CoverImageForm from "../forms/CoverImageForm";
 import LogoForm from "../forms/LogoForm";
+import Link from "next/link";
 
 function Overlay({ children }: { children: React.ReactNode }) {
   return (
@@ -86,7 +87,7 @@ function PhotoSection({ pharmacy }: { pharmacy: PharmacyType }) {
               </h1>
               {/* TODO: replace with the real license field */}
               <p className="text-xs text-muted-foreground">
-                License · PHM-34/2021-Dec
+               Since - {new Date(pharmacy.createdAt).toDateString()}
               </p>
             </div>
 
@@ -107,8 +108,8 @@ function PhotoSection({ pharmacy }: { pharmacy: PharmacyType }) {
                   <ShieldAlert className="size-3.5" />
                   Not verified
                 </Badge>
-                <Button size="sm" className="h-7 px-3 text-xs">
-                  Verify now
+                <Button asChild size="sm" className="h-7 px-3 text-xs">
+                  <Link href={`/pharmacy/verifications?pharmacyId=${pharmacy.id}`}>Verify now</Link>
                 </Button>
               </div>
             )}

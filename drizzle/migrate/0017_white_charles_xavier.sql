@@ -1,0 +1,1 @@
+ALTER TABLE "pharmacies" ALTER COLUMN "verificationStatus" SET DEFAULT 'not-verified';
